@@ -19,6 +19,7 @@
     </script>
     
     <!-- Other libraries go here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- Link to styles of your own -->
   <link rel="stylesheet" href="./styles/style.css">
@@ -61,15 +62,42 @@
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
+
     <div class="px-4 py-5 my-5 text-center" style="text-align:center; margin:0 auto;">
-        <img class="d-block mx-auto mb-4" src="./images/App_Icon.jpeg " alt="" width="100" height="100">
+        <img class="d-block mx-auto mb-4" src="./images/App_Icon.png" alt="" width="100" height="100">
         <h1 class="display-5 fw-bold">Welcome to Study App</h1>
         <div class="col-lg-6 mx-auto">
           <h2><p class="lead mb-4">Our App is developing an application to help BCIT students find study space on campus</p></h2>
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button type="button" class="button btn btn-outline-light">Login/Signup</button>
-          </div>
         </div>
+    </div>
+
+    <div class="col-md-5 offset-md-1 mb-3 mx-4">
+        <form>
+          <h5>Login/Sign Up Now</h5>
+          <p>Save your favorites, search filter preferences and more.</p>
+          <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+            <label for="newsletter1" class="visually-hidden">Email address</label>
+            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+            <button class="button btn btn-outline-light mx-auto" type="button">Login/Signup</button>
+          </div>
+        </form>
+    </div>
+
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                <img class="bi" width="30" height="24" src="./images/App_Icon.png" alt="">
+            </a>
+            <span class="mb-3 mb-md-0 text-body-secondary">© 2023 Company, Inc</span>
+          </div>
+      
+          <ul class="list-unstyled d-flex">
+            <h1><li class="ms-3"><a class="link-body-emphasis" href="#"><i class="fa fa-twitter"></i></a></li></h1>
+            <h1><li class="ms-3"><a class="link-body-emphasis" href="#"><i class="fa fa-instagram"></i></a></li></h1>
+            <h1><li class="ms-3"><a class="link-body-emphasis" href="#"><i class="fa fa-facebook"></i></a></li></h1>
+          </ul>
+        </footer>
     </div>
 </body>
 
