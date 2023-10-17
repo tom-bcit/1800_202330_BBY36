@@ -17,7 +17,6 @@
     border: none;
     font-size: 28px;
     color: #e69792;
-    width: auto;
     text-align: center;
     transition-duration: 0.4s;
     text-decoration: none;
@@ -43,4 +42,8 @@
     margin: 0;
     opacity: 1;
     transition: 0s
+  }
+
+  .top-icons {
+    font-size: xx-large;
   }
