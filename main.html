@@ -38,23 +38,48 @@
 <body>
   <nav id="navbarPlaceholder"></nav>
   <nav id="searchPlaceholder"></nav>
-  
-    <div class="px-4 py-5 my-5 text-center" style="text-align:center; margin:0 auto;">
-      <img class="d-block mx-auto mb-4" src="./images/App_Icon.png" alt="" width="100" height="100">
-      <h1 class="display-5 fw-bold">Welcome to Study App</h1>
-      <div class="col-lg-6 mx-auto">
-        <h2>
-          <p class="lead mb-4">Our App is developing an application to help BCIT students find study space on campus</p>
-        </h2>
+
+    <div class="px-4 text-center" style="text-align:center; margin:0 auto;">
+      <img class="d-block mx-auto" src="./images/App_Icon.png" alt="" width="100" height="100">
+      <h1 class="display-5 fw-bold">Hello <span id="name-goes-here"></span></h1>
+      <div class="container"> 
+        <h4>Here are some spaces nearby:</h4>
+        <!-- Here is the container for cards  -->
+        <div class="container">
+            <div id="spaces-go-here" class="row row-cols-auto">
+            </div>
+        </div>
       </div>
     </div>
     
     <nav id="footerPlaceholder"></nav>
 
+    <!-- Templates for general use, not displayed -->
+    <template id="spaceCardTemplate">
+      <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-3">
+            <img src="..." class="img-fluid rounded-start card-image card-img-left" alt="...">
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <a class="btn btn-primary card-href">Read more ...</a>
+              <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <img src="..." class="img-fluid rounded-start card-image card-img-right" alt="...">
+          </div>
+        </div>
+      </div>
+    </template>
+
     <!-- Your own JavaScript functions go here    -->
     <script src="./scripts/firebaseAPI_BBY36.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <script src="./scripts/authentication.js"></script>
+    <script src="./scripts/main.js"></script>
 
   </body>
 
