@@ -32,21 +32,21 @@ function displayCardsDynamically(collection) {
 
     db.collection(collection).get()   //the collection called "spaces"
         .then(allSpaces=> {
-            //var i = 1;  //Optional: if you want to have a unique ID for each hike
+            //var i = 1;  //Optional: if you want to have a unique ID for each space
             allSpaces.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key
                 var details = doc.data().details;  // get value of the "details" key
-				var hikeCode = doc.data().code;    //get unique ID to each hike to be used for fetching right image
-                var hikeLength = doc.data().status; //gets the status field
+				var spaceCode = doc.data().code;    //get unique ID to each space to be used for fetching right image
+                var spaceStatus = doc.data().status; //gets the status field
                 var docID = doc.id;
                 let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
                 //update title and text and image
                 newcard.querySelector('.card-title').innerHTML = title;
-                newcard.querySelector('.card-length').innerHTML = hikeLength +"km";
+                newcard.querySelector('.card-status').src = `./images/${spaceStatus}.jpg`;
                 newcard.querySelector('.card-text').innerHTML = details;
-                newcard.querySelector('.card-image').src = `./images/${hikeCode}.jpg`; //Example: NV01.jpg
-                newcard.querySelector('a').href = "eachHike.html?docID="+docID;
+                newcard.querySelector('.card-image').src = `./images/${spaceCode}.jpg`; //Example: NV01.jpg
+                newcard.querySelector('a').href = "eachSpace.html?docID="+docID;
 
                 //Optional: give unique ids to all elements for future use
                 // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
