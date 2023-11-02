@@ -3,7 +3,6 @@
 // (navbar, footer, and other things) into html doc. 
 //---------------------------------------------------
 function loadSkeleton() {
-
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {                   //if the pointer to "user" object is not null, then someone is logged in
             // User is signed in.
