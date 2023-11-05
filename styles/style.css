@@ -8,6 +8,15 @@
   /* Medium shade for navbar */
 }
 
+  .top-icons {
+    font-size: xx-large;
+  }
+  
+  .sm-3{
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+   border: 1px solid black;
+  }
+ 
 .btn-info {
   color: #F5DFBB;
   /* Light shade for text on info button */
@@ -137,3 +146,4 @@
 
 .dropdown a:hover {background-color: #ddd;}
 .show {display: block;}
+
