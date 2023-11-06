@@ -28,9 +28,10 @@ getNameFromAuth(); //run the function
 
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
-//------------------------------------------------------------------------------
+//----------------------------------------------------------    --------------------
 
 let users = [];
+
 
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("spaceCardTemplate"); // Retrieve the HTML element with the ID "spaceCardTemplate" and store it in the cardTemplate variable. 
@@ -83,24 +84,25 @@ displayCardsDynamically("spaces");  //input param is the name of the collection
 ///-------------------------------------------------
 ///FOR SEARCH BAR CHECKS WHAT INPUT IT
 ///---------------------------------------------------
-const searchInput = document.querySelector("[data-search212]");
+const searchInput = document.getElementById("search1");
 
 function addSearchEventListener() {
+if(searchInput){
     searchInput.addEventListener("input", (e) => {
         const value = e.target.value.toLowerCase();
 
 
 
         Array.from(document.getElementsByClassName('search3')).forEach((card) => {
-        
             const isVisible = card.getElementsByClassName('card-title')[0].innerText.includes(value);
             isVisible ? card.classList.remove('hide') :
                 card.classList.add('hide')
         })
+    
 
-
-     
+    
     })
+    }   
 }
 addSearchEventListener();
 
