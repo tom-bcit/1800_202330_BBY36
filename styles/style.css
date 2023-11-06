@@ -24,6 +24,7 @@
   /* Accent color for button background */
   border-color: #127475;
   /* Dark shade for button border */
+  
 }
 
 .button {
@@ -106,21 +107,32 @@
 }
 
 .dropbtn {
-  position: relative;
-  background-color: #f5ead8;
-  border: none;
-  font-size: 28px;
-  color: #e69792;
-  text-align: center;
-  transition-duration: 0.4s;
-  text-decoration: none;
-  overflow: hidden;
-  cursor: pointer;
- 
+  color: #127475;
+  /* Light shade for text on info button */
+  background-color: #ffffff;
+  /* Accent color for button background */
+  border-color: #127475;
+  /* Dark shade for button border */
 }
 
-.dropbtn:hover,.dropbtn:focus {
-  background-color: #2980B9;
+.dropbtn:after {
+  content: "";
+  background: #f1f1f1;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+
+}
+
+.dropbtn:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
 }
 
 .dropdown {
