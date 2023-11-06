@@ -35,7 +35,7 @@ let users = [];
 
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("spaceCardTemplate"); // Retrieve the HTML element with the ID "spaceCardTemplate" and store it in the cardTemplate variable. 
-
+if(cardTemplate){
     db.collection(collection).get()   //the collection called "spaces"
         .then(allSpaces => {
             //var i = 1;  //Optional: if you want to have a unique ID for each space
@@ -72,7 +72,7 @@ function displayCardsDynamically(collection) {
 
         })
 
-
+    }
 
 
 }
