@@ -1,7 +1,4 @@
-import {
-    addSearchEventListener
-    
-} from "./search.js";
+
 
 function getNameFromAuth() {
     firebase.auth().onAuthStateChanged(user => {
@@ -32,6 +29,9 @@ getNameFromAuth(); //run the function
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
+
+let users = [];
+
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("spaceCardTemplate"); // Retrieve the HTML element with the ID "spaceCardTemplate" and store it in the cardTemplate variable. 
 
@@ -62,11 +62,45 @@ function displayCardsDynamically(collection) {
                 document.getElementById(collection + "-go-here").appendChild(newcard);
 
                 //i++;   //Optional: iterate variable to serve as unique ID
-            })
-        })
-}
 
+
+
+
+
+            })
+
+        })
+
+
+
+
+}
 displayCardsDynamically("spaces");  //input param is the name of the collection
 
 
+
+
+///-------------------------------------------------
+///FOR SEARCH BAR CHECKS WHAT INPUT IT
+///---------------------------------------------------
+const searchInput = document.querySelector("[data-search212]");
+
+function addSearchEventListener() {
+    searchInput.addEventListener("input", (e) => {
+        const value = e.target.value.toLowerCase();
+
+
+
+        Array.from(document.getElementsByClassName('search3')).forEach((card) => {
+        
+            const isVisible = card.getElementsByClassName('card-title')[0].innerText.includes(value);
+            isVisible ? card.classList.remove('hide') :
+                card.classList.add('hide')
+        })
+
+
+     
+    })
+}
 addSearchEventListener();
+

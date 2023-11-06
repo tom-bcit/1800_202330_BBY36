@@ -3,29 +3,28 @@
 </head> 
 
 <body>
-<form class="d-flex" role="search">
-  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" class = "data-search">
-  <button class="btn btn-outline-success" type="submit">Search</button>
-</form>
 
-<script src="./scripts/search.js" type = "module"></script>
+  <form class="d-flex" role="search">
+    <input data-search212 class="form-control me-2" type="search" monkeyup="myFunction_ul()" placeholder="Search" aria-label="Search" >
+    <button class="btn btn-outline-success" onclick="myFunction()" class="dropbtn">Option</button>
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+
+  
+  
+  <ul id="myUL" class="hidden">
+    <li><a href="#">Burnaby Campus Library</a></li>
+    <li><a href="#">SW01</a></li>
+    <li><a href="#">SW03</a></li>
+    <li><a href="#">SW05</a></li>
+    <li><a href="#">SW02</a></li>
+    <li><a href="#">SE12</a></li>
+    <li><a href="#">NE01</a></li>
+  </ul>
+  <script src="./scripts/main.js" type = "module"></script>
+
+
 
 </body>
 
-<script src="./scripts/script.js"></script>
-<form class="d-flex" role="search">
-  <input class="form-control me-2" type="search" onkeyup="myFunction_ul()" placeholder="Search" aria-label="Search">
-  <button class="btn btn-outline-success" onclick="myFunction()" class="dropbtn">Option</button>
-  <button class="btn btn-outline-success" type="submit">Search</button>
-</form>
 
-<ul id="myUL" class="hidden">
-  <li><a href="#">Burnaby Campus Library</a></li>
-  <li><a href="#">SW01</a></li>
-  <li><a href="#">SW03</a></li>
-  <li><a href="#">SW05</a></li>
-  <li><a href="#">SW02</a></li>
-  <li><a href="#">SE12</a></li>
-  <li><a href="#">NE01</a></li>
-</ul>
-  
