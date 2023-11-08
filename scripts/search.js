@@ -51,4 +51,65 @@ function myFunction() {
       }
     }
   }
+
+  let applyVar = document.querySelector("#button2")
+  const distance  = document.querySelector("#filter")
+  const powerOutlet = document.querySelector("#filter2")
+  const numPeople = document.querySelector("#filter3")
+  const resultSearch = document.querySelector("#result-list")
+  const optionClick = document.querySelector("#button21")
+
+  console.log(distance);
+
+
+
+function addeventlisterners(){
+  distance.addEventListener("change", () => {
+ const selectedDistance = distance.value;
+    console.log(selectedDistance);
+
+
+
+
+  })
+
+  powerOutlet.addEventListener("change", () =>{
+    const selectedOutlet = powerOutlet.value;
+    console.log(selectedOutlet);
+
+
+
+
+
+  })
+  numPeople.addEventListener("change", () => {
+    const selectedPeople = numPeople.value;
+    console.log(selectedPeople);
+
+
+
+
+  })
+  
  
+  optionClick.addEventListener("click",  () => {
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString);
+    let newDistance = urlParams.get('filter1');
+    let newOutlet = urlParams.get('filter2');
+    let newPeople= urlParams.get('filter3');
+  
+    distance.value = newDistance;
+    powerOutlet.value = newOutlet;
+    numPeople.value = newPeople;
+
+
+
+
+  })
+
+
+
+}
+addeventlisterners();
+
