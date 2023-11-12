@@ -1,10 +1,10 @@
 function displayCardsDynamically(collection) {
-    let cardTemplate = document.getElementById("spaceCardTemplate_i"); // Retrieve the HTML element with the ID "spaceCardTemplate" and store it in the cardTemplate variable. 
+    let cardTemplate = document.getElementById("spaceCardTemplate_f"); // Retrieve the HTML element with the ID "spaceCardTemplate" and store it in the cardTemplate variable. 
 if(cardTemplate){
     db.collection(collection).get()   //the collection called "spaces"
-        .then(allindividual_space => {
+        .then(allfavorite => {
             //var i = 1;  //Optional: if you want to have a unique ID for each space
-            allindividual_space.forEach(doc => { //iterate thru each doc
+            allfavorite.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key
                 var details = doc.data().details;  // get value of the "details" key
                 var spaceCode = doc.data().code;    //get unique ID to each space to be used for fetching right image
@@ -42,7 +42,7 @@ if(cardTemplate){
 
 }
 
-displayCardsDynamically("individual_space");  //input param is the name of the collection
+displayCardsDynamically("favorite");  //input param is the name of the collection
 
 
 
@@ -60,7 +60,7 @@ displayCardsDynamically("individual_space");  //input param is the name of the c
 
 
 
-            Array.from(document.getElementsByClassName('search4')).forEach((card) => {
+            Array.from(document.getElementsByClassName('search5')).forEach((card) => {
                 const isVisible = card.getElementsByClassName('card-title')[0].innerText.includes(value);
                 isVisible ? card.classList.remove('hide') :
                     card.classList.add('hide')
