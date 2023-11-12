@@ -9,6 +9,6 @@ function getLocation() {
 }
 
 function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude +
-  "<br>Longitude: " + position.coords.longitude;
+  localStorage.setItem('latitude', position.coords.latitude);
+  localStorage.setItem('longitude', position.coords.longitude);
 }

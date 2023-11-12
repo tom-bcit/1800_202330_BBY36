@@ -41,6 +41,8 @@ if(cardTemplate){
             //var i = 1;  //Optional: if you want to have a unique ID for each space
             allSpaces.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key
+                var latitude = doc.data().latitude;       // get value of the "latitude" key
+                var longitude = doc.data().longitude;       // get value of the "longitude" key
                 var details = doc.data().details;  // get value of the "details" key
                 var spaceCode = doc.data().code;    //get unique ID to each space to be used for fetching right image
                 var spaceStatus = doc.data().status; //gets the status field
@@ -49,6 +51,10 @@ if(cardTemplate){
 
                 //update title and text and image
                 newcard.querySelector('.card-title').innerHTML = title;
+                console.log((parseFloat(localStorage.getItem("latitude")) - latitude));
+                newcard.querySelector('.distance').innerHTML = 
+                Math.sqrt((Math.pow((parseFloat(localStorage.getItem("latitude")) - latitude), 2)) 
+                + (Math.pow((parseFloat(localStorage.getItem("longitude")) - longitude), 2)));
                 newcard.querySelector('.card-status').src = `./images/${spaceStatus}.jpg`;
                 newcard.querySelector('.card-text').innerHTML = details;
                 newcard.querySelector('.card-image').src = `./images/${spaceCode}.jpg`; //Example: NV01.jpg
