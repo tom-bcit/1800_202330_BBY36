@@ -25,7 +25,7 @@ if(cardTemplate){
                 // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
 
                 //attach to gallery, Example: "hikes-go-here"
-                document.getElementById(collection + "individual_space-go-here").appendChild(newcard);
+                document.getElementById(collection + "-go-here").appendChild(newcard);
 
                 //i++;   //Optional: iterate variable to serve as unique ID
 
@@ -41,7 +41,6 @@ if(cardTemplate){
 
 
 }
-
 displayCardsDynamically("individual_space");  //input param is the name of the collection
 
 
