@@ -158,3 +158,20 @@
 .hide{
   display:none;
 }
+
+.green {
+  border: 10px green solid;
+}
+
+.yellow {
+  border: 10px rgb(239, 239, 0) solid;
+}
+
+.red {
+  border: 10px red solid;
+}
+
+.overflow {
+  height: 15vh;
+  overflow: hidden;
+}

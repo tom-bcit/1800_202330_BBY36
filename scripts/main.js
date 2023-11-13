@@ -33,7 +33,9 @@ getNameFromAuth(); //run the function
 let users = [];
 
 
-function displayCardsDynamically(collection) {
+function displayCardsDynamically(collection, list) {
+    console.log(list);
+
     let cardTemplate = document.getElementById("spaceCardTemplate"); // Retrieve the HTML element with the ID "spaceCardTemplate" and store it in the cardTemplate variable. 
 if(cardTemplate){
     db.collection(collection).get()   //the collection called "spaces"
@@ -46,18 +48,23 @@ if(cardTemplate){
                 var details = doc.data().details;  // get value of the "details" key
                 var spaceCode = doc.data().code;    //get unique ID to each space to be used for fetching right image
                 var spaceStatus = doc.data().status; //gets the status field
+                var favorite;
+                if (list.includes(title)) {
+                    favorite = "star"
+                } else {
+                    favorite = "empty_star"
+                }
                 var docID = doc.id;
                 let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
                 //update title and text and image
                 newcard.querySelector('.card-title').innerHTML = title;
-                console.log((parseFloat(localStorage.getItem("latitude")) - latitude));
                 newcard.querySelector('.distance').innerHTML = 
                 Math.sqrt((Math.pow((parseFloat(localStorage.getItem("latitude")) - latitude), 2)) 
                 + (Math.pow((parseFloat(localStorage.getItem("longitude")) - longitude), 2)));
-                newcard.querySelector('.card-status').src = `./images/${spaceStatus}.jpg`;
-                newcard.querySelector('.card-text').innerHTML = details;
+                newcard.querySelector('.card-image').classList.add(spaceStatus);
                 newcard.querySelector('.card-image').src = `./images/${spaceCode}.jpg`; //Example: NV01.jpg
+                newcard.querySelector('.favorite').src = `./images/${favorite}.png`; //Example: NV01.jpg
                 newcard.querySelector('a').href = "eachSpace.html?docID=" + docID;
 
                 //Optional: give unique ids to all elements for future use
@@ -69,24 +76,28 @@ if(cardTemplate){
                 document.getElementById(collection + "-go-here").appendChild(newcard);
 
                 //i++;   //Optional: iterate variable to serve as unique ID
-
-
-
-
-
             })
-
         })
-
     }
-
-
 }
-displayCardsDynamically("spaces");  //input param is the name of the collection
+firebase.auth().onAuthStateChanged(userRecord => {
+    let fav= [];
+    fav.concat(favorite(userRecord.uid));
+    console.log(fav);
+displayCardsDynamically("spaces", fav);  //input param is the name of the collection
+});
 
-
-
-
+function favorite(uid) { 
+    let user = db.collection("users").doc(uid);
+    user.get().then(documentSnapshot => {
+    if (documentSnapshot.exists) {
+        
+      let favorites = documentSnapshot.data().favorites;
+      console.log(favorites);
+      return favorites;
+    }
+  });
+}
     ///-------------------------------------------------
     ///FOR SEARCH BAR CHECKS WHAT INPUT IT
     ///---------------------------------------------------

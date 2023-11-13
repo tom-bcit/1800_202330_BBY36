@@ -46,7 +46,7 @@
       <h4>Here are some spaces nearby:</h4>
       <!-- Here is the container for cards  -->
       <div class="container">
-        <div id="spaces-go-here" class="row row-cols-auto">
+        <div id="spaces-go-here" class="row row-cols-auto d-flex justify-content-center">
         </div>
       </div>
     </div>
@@ -56,24 +56,23 @@
 
   <!-- Templates for general use, not displayed -->
   <template id="spaceCardTemplate">
-    <div class="search3 card sm-3" id="search3" style="max-width: 540px;">
-      <div class="row g-0">
-        <div class="col-sm-3">
-          <img class="img-fluid rounded-start card-image card-img-left" src=" ..." alt="...">
+    <div class="card" id="" style="max-width: 540px;">
+      <div class="row d-flex justify-content-center">
+        <div class="row">
+          <img class= "card-image p-0 object-fit-cover overflow" src=" ..." alt="...">
         </div>
-        <div class="col-sm-7">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6>Distance: <span class="distance">number</span></h6>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-              content. This content is a little bit longer.</p>
-            <a class="btn btn-primary card-href">Read more ...</a>
-            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        <div class="row">
+          <div class="col-sm-9">
+            <div class="card-body">
+              <h5> <span class="card-title">Card title</span> <br>Distance: <span class="distance">number</span></h5>
+              <a class="btn btn-primary card-href">Read more ...</a>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <img class="img-fluid favorite" src=" ..." alt="...">
           </div>
         </div>
-        <div class="col-sm-2">
-          <img class="img-fluid rounded-start card-status card-img-right" src=" ..." alt="...">
-        </div>
+
       </div>
     </div>
   </template>
