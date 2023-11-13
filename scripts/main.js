@@ -110,6 +110,8 @@ function updateFavorites(uid , id) {
         user.update("favorites", fav.splice(index, 1));
         console.log("remove " + id);
       } else {
+        console.log(fav);
+        console.log(fav.splice(0, 1, id));
         user.update("favorites", fav.splice(0, 1, id));
         console.log("add " + id);
       }
