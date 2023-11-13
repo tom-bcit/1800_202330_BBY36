@@ -62,6 +62,7 @@ if(cardTemplate){
                 newcard.querySelector('.card-image').classList.add(spaceStatus);
                 newcard.querySelector('.card-image').src = `./images/${spaceCode}.jpg`; //Example: NV01.jpg
                 newcard.querySelector('.favorite').src = `./images/${favorite}.png`; //Example: NV01.jpg
+                newcard.querySelector('.favorite').id = title; //Example: NV01.jpg
                 newcard.querySelector('a').href = "eachSpace.html?docID=" + docID;
 
                 //Optional: give unique ids to all elements for future use
@@ -77,37 +78,45 @@ if(cardTemplate){
         })
     }
 }
+
 firebase.auth().onAuthStateChanged(userRecord => {
-    let fav= [];
-    fav.concat(favorite(userRecord.uid));
-displayCardsDynamically("spaces", fav);  //input param is the name of the collection
+    favorite(userRecord.uid);
 });
 
 function favorite(uid) { 
     let user = db.collection("users").doc(uid);
     user.get().then(documentSnapshot => {
     if (documentSnapshot.exists) {
-        
       let favorites = documentSnapshot.data().favorites;
-      return favorites;
+      displayCardsDynamically("spaces", favorites);  //input param is the name of the collection
     }
   });
 }
 
-
-function favClick() {
-    const star = document.querySelector('.fav');
-    star.addEventListener('click', () => {
-        if (document.querySelector(`.fav`).src = `./images/empty_star.png`) {
-            document.querySelector(`.fav`).classList.add("star");
-            document.querySelector(`.fav`).classList.remove("empty_star");
-        }
-        if (document.querySelector(`.fav`).src = `./images/star.png`) {
-            document.querySelector(`.fav`).classList.add("empty_star");
-            document.querySelector(`.fav`).classList.remove("star");
-        }
+function favClick(id) {
+    firebase.auth().onAuthStateChanged(userRecord => {
+        updateFavorites(userRecord.uid, id);
     });
 }
+
+function updateFavorites(uid , id) {
+    let user = db.collection("users").doc(uid);
+    user.get().then(documentSnapshot => {
+    if (documentSnapshot.exists) {
+      let fav = documentSnapshot.data().favorites;
+      if (fav.includes(id)) {
+        let index = fav.findIndex(x => x == id);
+        console.log(fav);
+        user.update("favorites", fav.splice(index, 1));
+        console.log("remove " + id);
+      } else {
+        user.update("favorites", fav.splice(0, 1, id));
+        console.log("add " + id);
+      }
+    }
+  });
+}
+
     ///-------------------------------------------------
     ///FOR SEARCH BAR CHECKS WHAT INPUT IT
     ///---------------------------------------------------
