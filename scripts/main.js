@@ -34,8 +34,6 @@ let users = [];
 
 
 function displayCardsDynamically(collection, list) {
-    console.log(list);
-
     let cardTemplate = document.getElementById("spaceCardTemplate"); // Retrieve the HTML element with the ID "spaceCardTemplate" and store it in the cardTemplate variable. 
 if(cardTemplate){
     db.collection(collection).get()   //the collection called "spaces"
@@ -45,7 +43,6 @@ if(cardTemplate){
                 var title = doc.data().name;       // get value of the "name" key
                 var latitude = doc.data().latitude;       // get value of the "latitude" key
                 var longitude = doc.data().longitude;       // get value of the "longitude" key
-                var details = doc.data().details;  // get value of the "details" key
                 var spaceCode = doc.data().code;    //get unique ID to each space to be used for fetching right image
                 var spaceStatus = doc.data().status; //gets the status field
                 var favorite;
@@ -83,7 +80,6 @@ if(cardTemplate){
 firebase.auth().onAuthStateChanged(userRecord => {
     let fav= [];
     fav.concat(favorite(userRecord.uid));
-    console.log(fav);
 displayCardsDynamically("spaces", fav);  //input param is the name of the collection
 });
 
@@ -93,10 +89,24 @@ function favorite(uid) {
     if (documentSnapshot.exists) {
         
       let favorites = documentSnapshot.data().favorites;
-      console.log(favorites);
       return favorites;
     }
   });
+}
+
+
+function favClick() {
+    const star = document.querySelector('.fav');
+    star.addEventListener('click', () => {
+        if (document.querySelector(`.fav`).src = `./images/empty_star.png`) {
+            document.querySelector(`.fav`).classList.add("star");
+            document.querySelector(`.fav`).classList.remove("empty_star");
+        }
+        if (document.querySelector(`.fav`).src = `./images/star.png`) {
+            document.querySelector(`.fav`).classList.add("empty_star");
+            document.querySelector(`.fav`).classList.remove("star");
+        }
+    });
 }
     ///-------------------------------------------------
     ///FOR SEARCH BAR CHECKS WHAT INPUT IT
