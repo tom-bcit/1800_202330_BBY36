@@ -35,63 +35,69 @@ let users = [];
 
 function displayCardsDynamically(collection, list) {
     let cardTemplate = document.getElementById("spaceCardTemplate"); // Retrieve the HTML element with the ID "spaceCardTemplate" and store it in the cardTemplate variable. 
-if(cardTemplate){
-    db.collection(collection).get()   //the collection called "spaces"
-        .then(allSpaces => {
-            //var i = 1;  //Optional: if you want to have a unique ID for each space
-            allSpaces.forEach(doc => { //iterate thru each doc
-                var title = doc.data().name;       // get value of the "name" key
-                var latitude = doc.data().latitude;       // get value of the "latitude" key
-                var longitude = doc.data().longitude;       // get value of the "longitude" key
-                var spaceCode = doc.data().code;    //get unique ID to each space to be used for fetching right image
-                var spaceStatus = doc.data().status; //gets the status field
-                var favorite;
-                if (list.includes(title)) {
-                    favorite = "star"
-                } else {
-                    favorite = "empty_star"
-                }
-                var docID = doc.id;
-                let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
+    if (cardTemplate) {
+        db.collection(collection).get()   //the collection called "spaces"
+            .then(allSpaces => {
+                //var i = 1;  //Optional: if you want to have a unique ID for each space
+                allSpaces.forEach(doc => { //iterate thru each doc
+                    var title = doc.data().name;       // get value of the "name" key
+                    var latitude = doc.data().latitude;       // get value of the "latitude" key
+                    var longitude = doc.data().longitude;       // get value of the "longitude" key
+                    var spaceCode = doc.data().code;    //get unique ID to each space to be used for fetching right image
+                    var spaceStatus = doc.data().status; //gets the status field
+                    var favorite;
+                    if (list.includes(title)) {
+                        favorite = "star"
+                    } else {
+                        favorite = "empty_star"
+                    }
+                    var docID = doc.id;
+                    let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
-                //update title and text and image
-                newcard.querySelector('.card-title').innerHTML = title;
-                newcard.querySelector('.distance').innerHTML = 
-                Math.sqrt((Math.pow((parseFloat(localStorage.getItem("latitude")) - latitude), 2)) 
-                + (Math.pow((parseFloat(localStorage.getItem("longitude")) - longitude), 2)));
-                newcard.querySelector('.card-image').classList.add(spaceStatus);
-                newcard.querySelector('.card-image').src = `./images/${spaceCode}.jpg`; //Example: NV01.jpg
-                newcard.querySelector('.favorite').src = `./images/${favorite}.png`; //Example: NV01.jpg
-                newcard.querySelector('.favorite').id = title; //Example: NV01.jpg
-                newcard.querySelector('a').href = "eachSpace.html?docID=" + docID;
+                    //update title and text and image
+                    newcard.querySelector('.card-title').innerHTML = title;
+                    newcard.querySelector('.distance').innerHTML =
+                        Math.sqrt((Math.pow((parseFloat(localStorage.getItem("latitude")) - latitude), 2))
+                            + (Math.pow((parseFloat(localStorage.getItem("longitude")) - longitude), 2)));
+                    newcard.querySelector('.card-image').classList.add(spaceStatus);
+                    newcard.querySelector('.card-image').src = `./images/${spaceCode}.jpg`; //Example: NV01.jpg
+                    newcard.querySelector('.favorite').src = `./images/${favorite}.png`; //Example: NV01.jpg
+                    newcard.querySelector('.favorite').id = title; //Example: NV01.jpg
+                    newcard.querySelector('a').href = "eachSpace.html?docID=" + docID;
 
-                //Optional: give unique ids to all elements for future use
-                // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
-                // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
-                // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
+                    //Optional: give unique ids to all elements for future use
+                    // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
+                    // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
+                    // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
 
-                //attach to gallery, Example: "hikes-go-here"
-                document.getElementById(collection + "-go-here").appendChild(newcard);
+                    //attach to gallery, Example: "hikes-go-here"
+                    document.getElementById(collection + "-go-here").appendChild(newcard);
 
-                //i++;   //Optional: iterate variable to serve as unique ID
+                    //i++;   //Optional: iterate variable to serve as unique ID
+                })
             })
-        })
     }
 }
 
 firebase.auth().onAuthStateChanged(userRecord => {
-    favorite(userRecord.uid);
+    localStorage.setItem("uid", userRecord.uid);
 });
 
-function favorite(uid) { 
-    let user = db.collection("users").doc(uid);
-    user.get().then(documentSnapshot => {
-    if (documentSnapshot.exists) {
-      let favorites = documentSnapshot.data().favorites;
-      displayCardsDynamically("spaces", favorites);  //input param is the name of the collection
-    }
-  });
-}
+db.collection("users").doc(localStorage.getItem("uid"))
+        .onSnapshot((doc) => {
+            
+            document.getElementById("card-container").innerHTML = "<div id=\"spaces-go-here\" class=\"row row-cols-auto d-flex justify-content-center\"></div>";
+            let user = db.collection("users").doc(localStorage.getItem("uid"));
+            user.get().then(documentSnapshot => {
+                if (documentSnapshot.exists) {
+                    let favorites = documentSnapshot.data().favorites;
+                    displayCardsDynamically("spaces", favorites);  //input param is the name of the collection
+                }
+            })
+        })
+
+
+
 
 function favClick(id) {
     firebase.auth().onAuthStateChanged(userRecord => {
@@ -99,53 +105,53 @@ function favClick(id) {
     });
 }
 
-function updateFavorites(uid , id) {
+function updateFavorites(uid, id) {
     let user = db.collection("users").doc(uid);
     user.get().then(documentSnapshot => {
-    if (documentSnapshot.exists) {
-      let fav = documentSnapshot.data().favorites;
-      if (fav.includes(id)) {
-        let index = fav.findIndex(x => x == id);
-        console.log(fav);
-        console.log(fav.splice(index, 1));
-        user.update("favorites", fav);
-        console.log("remove " + id);
-      } else {
-        console.log(typeof id);
-        console.log(fav);
-        fav.splice(0, 0, id);
-        
-        user.update("favorites", fav);
-        console.log("add " + id);
-      }
-    }
-  });
+        if (documentSnapshot.exists) {
+            let fav = documentSnapshot.data().favorites;
+            if (fav.includes(id)) {
+                let index = fav.findIndex(x => x == id);
+                console.log(fav);
+                console.log(fav.splice(index, 1));
+                user.update("favorites", fav);
+                console.log("remove " + id);
+            } else {
+                console.log(typeof id);
+                console.log(fav);
+                fav.splice(0, 0, id);
+
+                user.update("favorites", fav);
+                console.log("add " + id);
+            }
+        }
+    });
 }
 
-    ///-------------------------------------------------
-    ///FOR SEARCH BAR CHECKS WHAT INPUT IT
-    ///---------------------------------------------------
-    const searchInput = document.getElementById("search-1");
-    console.log(searchInput);
+///-------------------------------------------------
+///FOR SEARCH BAR CHECKS WHAT INPUT IT
+///---------------------------------------------------
+const searchInput = document.getElementById("search-1");
+console.log(searchInput);
 
-    function addSearchEventListener() {
-    if(searchInput){
+function addSearchEventListener() {
+    if (searchInput) {
         searchInput.addEventListener("input", (e) => {
             const value = e.target.value.toLowerCase();
-            
+
 
 
 
             Array.from(document.getElementsByClassName('search3')).forEach((card) => {
                 const isVisible = card.getElementsByClassName('card-title')[0].innerText.includes(value);
-                isVisible ? card.classList.remove('hide'):
+                isVisible ? card.classList.remove('hide') :
                     card.classList.add('hide');
             })
-        
 
-        
+
+
         })
-        }   
     }
-    addSearchEventListener();
+}
+addSearchEventListener();
 
