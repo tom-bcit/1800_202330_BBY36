@@ -13,6 +13,8 @@ function displaySpaceInfo() {
           spaceName = doc.data().name;
           spaceDetails = doc.data().details;
           spaceCapacity = doc.data().capacity;
+          spacelongitude = doc.data().longitude;
+          spacelatitude = doc.data().latitude;
           if (doc.data().power_outlet) {
             spacePower = "Yes";
           } else {
@@ -37,3 +39,10 @@ function saveSpaceDocumentIDAndRedirect(){
     localStorage.setItem('spaceDocID', ID);
 }
 
+function myMap() {
+  var mapProp= {
+    center:new google.maps.LatLng(spacelatitude,spacelongitude),
+    zoom:18,
+  };
+  var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+  }
