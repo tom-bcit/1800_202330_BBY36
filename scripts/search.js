@@ -135,16 +135,11 @@ function addeventlisteners(){
 
  
 
-   }
+   })
 
 
 
-
-  })
-  
-
-
-}
+  }
 
 addeventlisteners();
 
