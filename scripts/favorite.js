@@ -80,27 +80,4 @@ function favorite(uid) {
   });
 }
 
-    ///-------------------------------------------------
-    ///FOR SEARCH BAR CHECKS WHAT INPUT IT
-    ///---------------------------------------------------
-    const searchInput = document.getElementById("search1");
-
-    function addSearchEventListener() {
-    if(searchInput){
-        searchInput.addEventListener("input", (e) => {
-            const value = e.target.value.toLowerCase();
-
-
-
-            Array.from(document.getElementsByClassName('search5')).forEach((card) => {
-                const isVisible = card.getElementsByClassName('card-title')[0].innerText.includes(value);
-                isVisible ? card.classList.remove('hide') :
-                    card.classList.add('hide')
-            })
-        
-
-        
-        })
-        }   
-    }
-    addSearchEventListener();
+  
