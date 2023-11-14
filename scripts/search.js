@@ -59,7 +59,7 @@ function myFunction() {
   const resultSearch = document.querySelector("#result-list")
   const optionClick = document.querySelector("#button21")
 
-  console.log(distance);
+
 
 
 

@@ -84,19 +84,21 @@ displayCardsDynamically("spaces");  //input param is the name of the collection
     ///-------------------------------------------------
     ///FOR SEARCH BAR CHECKS WHAT INPUT IT
     ///---------------------------------------------------
-    const searchInput = document.getElementById("search1");
+    const searchInput = document.querySelector(".me-2 ");
+    console.log(searchInput);
 
     function addSearchEventListener() {
     if(searchInput){
         searchInput.addEventListener("input", (e) => {
             const value = e.target.value.toLowerCase();
+            
 
 
 
             Array.from(document.getElementsByClassName('search3')).forEach((card) => {
                 const isVisible = card.getElementsByClassName('card-title')[0].innerText.includes(value);
-                isVisible ? card.classList.remove('hide') :
-                    card.classList.add('hide')
+                isVisible ? card.classList.remove('hide'):
+                    card.classList.add('hide');
             })
         
 
