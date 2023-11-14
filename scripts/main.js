@@ -107,12 +107,15 @@ function updateFavorites(uid , id) {
       if (fav.includes(id)) {
         let index = fav.findIndex(x => x == id);
         console.log(fav);
-        user.update("favorites", fav.splice(index, 1));
+        console.log(fav.splice(index, 1));
+        user.update("favorites", fav);
         console.log("remove " + id);
       } else {
+        console.log(typeof id);
         console.log(fav);
-        console.log(fav.splice(0, 1, id));
-        user.update("favorites", fav.splice(0, 1, id));
+        fav.splice(0, 0, id);
+        
+        user.update("favorites", fav);
         console.log("add " + id);
       }
     }
