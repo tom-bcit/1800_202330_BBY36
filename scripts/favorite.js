@@ -1,5 +1,3 @@
-
-
 function getNameFromAuth() {
     firebase.auth().onAuthStateChanged(user => {
         // Check if a user is signed in:
@@ -25,14 +23,6 @@ function getNameFromAuth() {
 }
 getNameFromAuth(); //run the function
 
-
-//------------------------------------------------------------------------------
-// Input parameter is a string representing the collection we are reading from
-//----------------------------------------------------------    --------------------
-
-let users = [];
-
-
 function displayCardsDynamically(collection, list) {
     let cardTemplate = document.getElementById("spaceCardTemplate"); // Retrieve the HTML element with the ID "spaceCardTemplate" and store it in the cardTemplate variable. 
 if(cardTemplate){
@@ -48,21 +38,18 @@ if(cardTemplate){
                 var favorite;
                 if (list.includes(title)) {
                     favorite = "star"
-                } else {
-                    favorite = "empty_star"
-                }
+                    
                 var docID = doc.id;
                 let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
                 //update title and text and image
                 newcard.querySelector('.card-title').innerHTML = title;
                 newcard.querySelector('.distance').innerHTML = 
-                Math.sqrt((Math.pow((parseFloat(localStorage.getItem("latitude")) - latitude), 2)) 
-                + (Math.pow((parseFloat(localStorage.getItem("longitude")) - longitude), 2)));
+                (Math.sqrt((Math.pow((parseFloat(localStorage.getItem("latitude")) - latitude), 2)) 
+                + (Math.pow((parseFloat(localStorage.getItem("longitude")) - longitude), 2))));
                 newcard.querySelector('.card-image').classList.add(spaceStatus);
                 newcard.querySelector('.card-image').src = `./images/${spaceCode}.jpg`; //Example: NV01.jpg
                 newcard.querySelector('.favorite').src = `./images/${favorite}.png`; //Example: NV01.jpg
-                newcard.querySelector('.favorite').id = title; //Example: NV01.jpg
                 newcard.querySelector('a').href = "eachSpace.html?docID=" + docID;
 
                 //Optional: give unique ids to all elements for future use
@@ -72,7 +59,7 @@ if(cardTemplate){
 
                 //attach to gallery, Example: "hikes-go-here"
                 document.getElementById(collection + "-go-here").appendChild(newcard);
-
+                }
                 //i++;   //Optional: iterate variable to serve as unique ID
             })
         })
@@ -93,50 +80,22 @@ function favorite(uid) {
   });
 }
 
-function favClick(id) {
-    firebase.auth().onAuthStateChanged(userRecord => {
-        updateFavorites(userRecord.uid, id);
-    });
-}
-
-function updateFavorites(uid , id) {
-    let user = db.collection("users").doc(uid);
-    user.get().then(documentSnapshot => {
-    if (documentSnapshot.exists) {
-      let fav = documentSnapshot.data().favorites;
-      if (fav.includes(id)) {
-        let index = fav.findIndex(x => x == id);
-        console.log(fav);
-        user.update("favorites", fav.splice(index, 1));
-        console.log("remove " + id);
-      } else {
-        console.log(fav);
-        console.log(fav.splice(0, 1, id));
-        user.update("favorites", fav.splice(0, 1, id));
-        console.log("add " + id);
-      }
-    }
-  });
-}
-
     ///-------------------------------------------------
     ///FOR SEARCH BAR CHECKS WHAT INPUT IT
     ///---------------------------------------------------
-    const searchInput = document.querySelector(".me-2 ");
-    console.log(searchInput);
+    const searchInput = document.getElementById("search1");
 
     function addSearchEventListener() {
     if(searchInput){
         searchInput.addEventListener("input", (e) => {
             const value = e.target.value.toLowerCase();
-            
 
 
 
-            Array.from(document.getElementsByClassName('search3')).forEach((card) => {
+            Array.from(document.getElementsByClassName('search5')).forEach((card) => {
                 const isVisible = card.getElementsByClassName('card-title')[0].innerText.includes(value);
-                isVisible ? card.classList.remove('hide'):
-                    card.classList.add('hide');
+                isVisible ? card.classList.remove('hide') :
+                    card.classList.add('hide')
             })
         
 
@@ -145,4 +104,3 @@ function updateFavorites(uid , id) {
         }   
     }
     addSearchEventListener();
-
