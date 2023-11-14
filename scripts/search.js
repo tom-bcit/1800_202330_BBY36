@@ -59,7 +59,7 @@ function myFunction() {
   const resultSearch = document.querySelector("#result-list")
   const optionClick = document.querySelector("#button21")
 
-  console.log(distance);
+
 
 
 
@@ -111,23 +111,29 @@ function addeventlisterners(){
 
 
 }
-addeventlisterners();
-// get elements by their ID
-const searchInput = document.getElementById('searchInput');
-const searchButton = document.getElementById('searchButton');
+document.addEventListener('DOMContentLoaded', function() {
+  // get elements by their ID
+  const searchInput = document.getElementById('searchInput');
+  const searchButton = document.getElementById('searchButton');
 
-// add event listener to the button
-searchButton.addEventListener('click', function() {
-  // get the search input value
-  const searchTerm = searchInput.value;
-  // not done yet here because we done have eachstudy space html
-  console.log(`Searching for "${searchTerm}"...`);
-});
+  // Check if elements exist
+  if(searchButton && searchInput) {
+      // add event listener to the button
+      searchButton.addEventListener('click', function() {
+          // get the search input value
+          const searchTerm = searchInput.value;
+          console.log(`Searching for "${searchTerm}"...`);
+          window.location.href = 'eachSpace.html?docID=2RPWUFUhUUnuies5aYFw' + encodeURIComponent(searchTerm);
+      });
 
-// add event listener to the input (if you want to trigger the search on Enter keypress)
-searchInput.addEventListener('keyup', function(event) {
-  if (event.keyCode === 13) {
-    // simulate a button click to trigger the search
-    searchButton.click();
+      // add event listener to the input (if you want to trigger the search on Enter keypress)
+      searchInput.addEventListener('keyup', function(event) {
+          if (event.keyCode === 13) { // Enter key code
+              // simulate a button click to trigger the search
+              searchButton.click();
+          }
+      });
+  } else {
+      console.error("Elements not found");
   }
 });
