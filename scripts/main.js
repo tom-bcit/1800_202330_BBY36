@@ -56,9 +56,14 @@ function displayCardsDynamically(collection, list) {
 
                     //update title and text and image
                     newcard.querySelector('.card-title').innerHTML = title;
+                    let deltaLat = (parseFloat(localStorage.getItem("latitude")) - latitude);
+                    let deltaLon = (parseFloat(localStorage.getItem("longitude")) - longitude);
+                    let latMid = (parseFloat(localStorage.getItem("latitude")) + latitude) / 2;
+                    let m_per_deg_lat = 111132.954 - 559.822 * Math.cos( 2.0 * latMid ) + 1.175 * Math.cos( 4.0 * latMid);
+                    let m_per_deg_lon = (3.14159265359/180 ) * 6367449 * Math.cos ( latMid );
                     newcard.querySelector('.distance').innerHTML =
-                        Math.sqrt((Math.pow((parseFloat(localStorage.getItem("latitude")) - latitude), 2))
-                            + (Math.pow((parseFloat(localStorage.getItem("longitude")) - longitude), 2)));
+                        Math.sqrt((Math.pow(deltaLat * m_per_deg_lat, 2))
+                            + (Math.pow(deltaLon * m_per_deg_lon, 2)));
                     newcard.querySelector('.card-image').classList.add(spaceStatus);
                     newcard.querySelector('.card-image').src = `./images/${spaceCode}.jpg`; //Example: NV01.jpg
                     newcard.querySelector('.favorite').src = `./images/${favorite}.png`; //Example: NV01.jpg
@@ -77,6 +82,18 @@ function displayCardsDynamically(collection, list) {
                 })
             })
     }
+}
+
+function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
+    var R = 6378.137; // Radius of earth in KM
+    var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
+    var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon/2) * Math.sin(dLon/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var d = R * c;
+    return d * 1000; // meters
 }
 
 firebase.auth().onAuthStateChanged(userRecord => {
