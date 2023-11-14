@@ -30,9 +30,6 @@ getNameFromAuth(); //run the function
 // Input parameter is a string representing the collection we are reading from
 //----------------------------------------------------------    --------------------
 
-let users = [];
-
-
 function displayCardsDynamically(collection, list) {
     let cardTemplate = document.getElementById("spaceCardTemplate"); // Retrieve the HTML element with the ID "spaceCardTemplate" and store it in the cardTemplate variable. 
     if (cardTemplate) {

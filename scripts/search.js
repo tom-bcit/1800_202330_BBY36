@@ -52,6 +52,36 @@ function myFunction() {
     }
   }
 
+
+
+  ///-------------------------------------------------
+    ///FOR SEARCH BAR CHECKS WHAT INPUT IT
+    ///---------------------------------------------------
+    const searchInput = document.querySelector(".me-2");
+    
+
+    function addSearchEventListener() {
+    if(searchInput){
+        searchInput.addEventListener("input", (e) => {
+            const value = e.target.value.toLowerCase();
+            Array.from(document.getElementsByClassName('card')).forEach((card) => {
+                const isVisible = card.getElementsByClassName('card-title')[0].innerText.toLowerCase().includes(value);
+                isVisible ? card.classList.remove('hide'):
+                    card.classList.add('hide');
+            })
+        
+
+        
+        })
+        }   
+    }
+    addSearchEventListener();
+
+
+    //
+    //  DROPDOWN FOR OPTIONS SAVES THEM
+    //
+
   let applyVar = document.querySelector("#button2")
   const distance  = document.querySelector("#filter")
   const powerOutlet = document.querySelector("#filter2")
@@ -63,7 +93,7 @@ function myFunction() {
 
 
 
-function addeventlisterners(){
+function addeventlisteners(){
   distance.addEventListener("change", () => {
  const selectedDistance = distance.value;
     console.log(selectedDistance);
@@ -103,14 +133,21 @@ function addeventlisterners(){
     powerOutlet.value = newOutlet;
     numPeople.value = newPeople;
 
+ 
+
+   }
+
 
 
 
   })
-
+  
 
 
 }
+
+addeventlisteners();
+
 document.addEventListener('DOMContentLoaded', function() {
   // get elements by their ID
   const searchInput = document.getElementById('searchInput');
@@ -139,25 +176,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-    ///-------------------------------------------------
-    ///FOR SEARCH BAR CHECKS WHAT INPUT IT
-    ///---------------------------------------------------
-    const searchInput = document.querySelector(".me-2");
     
-
-    function addSearchEventListener() {
-    if(searchInput){
-        searchInput.addEventListener("input", (e) => {
-            const value = e.target.value.toLowerCase();
-            Array.from(document.getElementsByClassName('card')).forEach((card) => {
-                const isVisible = card.getElementsByClassName('card-title')[0].innerText.toLowerCase().includes(value);
-                isVisible ? card.classList.remove('hide'):
-                    card.classList.add('hide');
-            })
-        
-
-        
-        })
-        }   
-    }
-    addSearchEventListener();
