@@ -149,7 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if(searchInput){
         searchInput.addEventListener("input", (e) => {
             const value = e.target.value.toLowerCase();
-           
             Array.from(document.getElementsByClassName('card')).forEach((card) => {
                 const isVisible = card.getElementsByClassName('card-title')[0].innerText.toLowerCase().includes(value);
                 isVisible ? card.classList.remove('hide'):
