@@ -112,17 +112,11 @@ function updateFavorites(uid, id) {
             let fav = documentSnapshot.data().favorites;
             if (fav.includes(id)) {
                 let index = fav.findIndex(x => x == id);
-                console.log(fav);
-                console.log(fav.splice(index, 1));
+                fav.splice(index, 1);
                 user.update("favorites", fav);
-                console.log("remove " + id);
             } else {
-                console.log(typeof id);
-                console.log(fav);
                 fav.splice(0, 0, id);
-
                 user.update("favorites", fav);
-                console.log("add " + id);
             }
         }
     });
