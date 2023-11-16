@@ -30,6 +30,8 @@ getNameFromAuth(); //run the function
 // Input parameter is a string representing the collection we are reading from
 //----------------------------------------------------------    --------------------
 
+
+
 function displayCardsDynamically(collection, list) {
     let cardTemplate = document.getElementById("spaceCardTemplate"); // Retrieve the HTML element with the ID "spaceCardTemplate" and store it in the cardTemplate variable. 
     if (cardTemplate) {
@@ -43,6 +45,9 @@ function displayCardsDynamically(collection, list) {
                     var spaceCode = doc.data().code;    //get unique ID to each space to be used for fetching right image
                     var spaceStatus = doc.data().status; //gets the status field
                     var favorite;
+                   
+                    
+
                     if (list.includes(title)) {
                         favorite = "star"
                     } else {
@@ -80,6 +85,8 @@ function displayCardsDynamically(collection, list) {
             })
     }
 }
+
+
 
 function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
     var R = 6378.137; // Radius of earth in KM

@@ -3,6 +3,10 @@ toggle between hiding and showing the dropdown content */
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
   }
+
+
+
+
   
   function myFunction() {
     var input, filter, ul, li, a, i, txtValue;
@@ -81,6 +85,7 @@ function myFunction() {
     //
     //  DROPDOWN FOR OPTIONS SAVES THEM
     //
+    
 
   let applyVar = document.querySelector("#button2")
   const distance  = document.querySelector("#filter")
