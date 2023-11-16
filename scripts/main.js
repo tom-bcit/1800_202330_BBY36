@@ -53,11 +53,7 @@ function displayCardsDynamically(collection, list) {
                    
                     
 
-                    if (list.includes(title)) {
-                        favorite = "star"
-                    } else {
-                        favorite = "empty_star"
-                    }
+                   
                     var docID = doc.id;
                     currentUser.get().then(userDoc => {
                         //get the user name
