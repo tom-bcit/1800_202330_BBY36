@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
           // get the search input value
           const searchTerm = searchInput.value;
           console.log(`Searching for "${searchTerm}"...`);
-          window.location.href = 'eachSpace.html?docID=2RPWUFUhUUnuies5aYFw' + encodeURIComponent(searchTerm);
+          window.location.href = 'eachSpace.html' + encodeURIComponent(searchTerm);
       });
 
       // add event listener to the input (if you want to trigger the search on Enter keypress)
