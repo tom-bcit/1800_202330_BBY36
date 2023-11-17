@@ -6,7 +6,6 @@ function doAll() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             currentUser = db.collection("users").doc(user.uid); //global
-            console.log(currentUser);
 
             // the following functions are always called when someone is logged in
             insertNameFromFirestore();
@@ -25,7 +24,6 @@ function insertNameFromFirestore() {
     currentUser.get().then(userDoc => {
         //get the user name
         var user_Name = userDoc.data().name;
-        console.log(user_Name);
         $("#name-goes-here").text(user_Name); //jquery
         // document.getElementByID("name-goes-here").innetText=user_Name;
     })
@@ -37,7 +35,7 @@ function insertNameFromFirestore() {
 
 
 
-function displayCardsDynamically(collection, list) {
+function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("spaceCardTemplate"); // Retrieve the HTML element with the ID "spaceCardTemplate" and store it in the cardTemplate variable. 
     if (cardTemplate) {
         db.collection(collection).get()   //the collection called "spaces"
@@ -49,8 +47,7 @@ function displayCardsDynamically(collection, list) {
                     var longitude = doc.data().longitude;       // get value of the "longitude" key
                     var spaceCode = doc.data().code;    //get unique ID to each space to be used for fetching right image
                     var spaceStatus = doc.data().status; //gets the status field
-                    
-                   
+
                     var docID = doc.id;
                     currentUser.get().then(userDoc => {
                         //get the user name
@@ -73,21 +70,13 @@ function displayCardsDynamically(collection, list) {
 
                     //update title and text and image
                     newcard.querySelector('.card-title').innerHTML = title;
-                    let deltaLat = (parseFloat(localStorage.getItem("latitude")) - latitude);
-                    let deltaLon = (parseFloat(localStorage.getItem("longitude")) - longitude);
-                    let latMid = (parseFloat(localStorage.getItem("latitude")) + latitude) / 2;
-                    let m_per_deg_lat = 111132.954 - 559.822 * Math.cos(2.0 * latMid) + 1.175 * Math.cos(4.0 * latMid);
-                    let m_per_deg_lon = (3.14159265359 / 180) * 6367449 * Math.cos(latMid);
-                    newcard.querySelector('.distance').innerHTML =
-                        Math.sqrt((Math.pow(deltaLat * m_per_deg_lat, 2)) + (Math.pow(deltaLon * m_per_deg_lon, 2)));
+                    newcard.querySelector('.distance').innerHTML = measure(longitude, latitude);    
                     newcard.querySelector('.card-image').classList.add(spaceStatus);
                     newcard.querySelector('.card-image').src = `./images/${spaceCode}.jpg`; //Example: NV01.jpg
                     newcard.querySelector('.card').id = docID;
                     newcard.querySelector('.favorite').id = 'save-' + docID;
-
                     newcard.querySelector('.favorite').onclick = () => saveFavorite(docID);
                     newcard.querySelector('a').href = "eachSpace.html?docID=" + docID;
-
                     //Optional: give unique ids to all elements for future use
                     // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
                     // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
@@ -102,18 +91,13 @@ function displayCardsDynamically(collection, list) {
     }
 }
 
-
-
-function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
-    var R = 6378.137; // Radius of earth in KM
-    var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
-    var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
-    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) 
-        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-        Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = R * c;
-    return d * 1000; // meters
+function measure(longitude, latitude) {
+    let deltaLat = (parseFloat(localStorage.getItem("latitude")) - latitude);
+    let deltaLon = (parseFloat(localStorage.getItem("longitude")) - longitude);
+    let latMid = (parseFloat(localStorage.getItem("latitude")) + latitude) / 2;
+    let m_per_deg_lat = 111132.954 - 559.822 * Math.cos(2.0 * latMid) + 1.175 * Math.cos(4.0 * latMid);
+    let m_per_deg_lon = (3.14159265359 / 180) * 6367449 * Math.cos(latMid);
+    return Math.sqrt((Math.pow(deltaLat * m_per_deg_lat, 2)) + (Math.pow(deltaLon * m_per_deg_lon, 2)));
 }
 
 function saveFavorite(spaceDocID) {
@@ -126,8 +110,6 @@ function saveFavorite(spaceDocID) {
                 // Handle the front-end update to change the icon, providing visual feedback to the user that it has been clicked.
                 .then(function () {
                     console.log("favorite has been removed for" + spaceDocID);
-                    var iconID = 'save-' + spaceDocID;
-                    //console.log(iconID);
                     //this is to change the icon of the space that was saved to "filled"
                     document.getElementById('save-' + spaceDocID).innerText = "";
                     let img = document.createElement("img");
@@ -137,24 +119,22 @@ function saveFavorite(spaceDocID) {
                 });
         }
         else {
-        // Manage the backend process to store the spaceDocID in the database, recording which space was favorited by the user.
-        currentUser.update({
-            // Use 'arrayUnion' to add the new favorite ID to the 'favorites' array.
-            // This method ensures that the ID is added only if it's not already present, preventing duplicates.
-            favorites: firebase.firestore.FieldValue.arrayUnion(spaceDocID)
-        })
-            // Handle the front-end update to change the icon, providing visual feedback to the user that it has been clicked.
-            .then(function () {
-                console.log("favorite has been saved for" + spaceDocID);
-                var iconID = 'save-' + spaceDocID;
-                //console.log(iconID);
-                //this is to change the icon of the space that was saved to "filled"
-                document.getElementById('save-' + spaceDocID).innerText = "";
-                let img = document.createElement("img");
-                img.src = "./images/star.png";
-                img.className = "img-fluid"
-                document.getElementById('save-' + spaceDocID).append(img);
-            });
+            // Manage the backend process to store the spaceDocID in the database, recording which space was favorited by the user.
+            currentUser.update({
+                // Use 'arrayUnion' to add the new favorite ID to the 'favorites' array.
+                // This method ensures that the ID is added only if it's not already present, preventing duplicates.
+                favorites: firebase.firestore.FieldValue.arrayUnion(spaceDocID)
+            })
+                // Handle the front-end update to change the icon, providing visual feedback to the user that it has been clicked.
+                .then(function () {
+                    console.log("favorite has been saved for" + spaceDocID);
+                    //this is to change the icon of the space that was saved to "filled"
+                    document.getElementById('save-' + spaceDocID).innerText = "";
+                    let img = document.createElement("img");
+                    img.src = "./images/star.png";
+                    img.className = "img-fluid"
+                    document.getElementById('save-' + spaceDocID).append(img);
+                });
         }
     })
 
