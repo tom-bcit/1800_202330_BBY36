@@ -82,7 +82,7 @@ function displayCardsDynamically(collection, list) {
                         Math.sqrt((Math.pow(deltaLat * m_per_deg_lat, 2)) + (Math.pow(deltaLon * m_per_deg_lon, 2)));
                     newcard.querySelector('.card-image').classList.add(spaceStatus);
                     newcard.querySelector('.card-image').src = `./images/${spaceCode}.jpg`; //Example: NV01.jpg
-
+                    newcard.querySelector('.card').id = docID;
                     newcard.querySelector('.favorite').id = 'save-' + docID;
 
                     newcard.querySelector('.favorite').onclick = () => saveFavorite(docID);
@@ -108,7 +108,7 @@ function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement fun
     var R = 6378.137; // Radius of earth in KM
     var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
     var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
-    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) 
         Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
         Math.sin(dLon / 2) * Math.sin(dLon / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
