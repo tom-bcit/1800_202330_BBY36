@@ -49,11 +49,7 @@ function displayCardsDynamically(collection, list) {
                     var longitude = doc.data().longitude;       // get value of the "longitude" key
                     var spaceCode = doc.data().code;    //get unique ID to each space to be used for fetching right image
                     var spaceStatus = doc.data().status; //gets the status field
-                    var favorite;
-                   
-                    
 
-                   
                     var docID = doc.id;
                     currentUser.get().then(userDoc => {
                         //get the user name
@@ -85,7 +81,7 @@ function displayCardsDynamically(collection, list) {
                         Math.sqrt((Math.pow(deltaLat * m_per_deg_lat, 2)) + (Math.pow(deltaLon * m_per_deg_lon, 2)));
                     newcard.querySelector('.card-image').classList.add(spaceStatus);
                     newcard.querySelector('.card-image').src = `./images/${spaceCode}.jpg`; //Example: NV01.jpg
-
+                    newcard.querySelector('.card').id = docID;
                     newcard.querySelector('.favorite').id = 'save-' + docID;
 
                     newcard.querySelector('.favorite').onclick = () => saveFavorite(docID);
