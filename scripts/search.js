@@ -64,21 +64,18 @@ function myFunction() {
     const searchInput = document.querySelector(".me-2");
     
 
-    function addSearchEventListener() {
+  function addSearchEventListener() {
     if(searchInput){
-        searchInput.addEventListener("input", (e) => {
-            const value = e.target.value.toLowerCase();
-            Array.from(document.getElementsByClassName('card')).forEach((card) => {
-                const isVisible = card.getElementsByClassName('card-title')[0].innerText.toLowerCase().includes(value);
-                isVisible ? card.classList.remove('hide'):
-                    card.classList.add('hide');
-            })
-        
-
-        
-        })
-        }   
-    }
+     searchInput.addEventListener("input", (e) => {
+        const value = e.target.value.toLowerCase();
+        Array.from(document.getElementsByClassName('card')).forEach((card) => {
+          const isVisible = card.getElementsByClassName('card-title')[0].innerText.toLowerCase().includes(value);
+          isVisible ? card.classList.remove('hide'):
+          card.classList.add('hide');
+       })
+     })
+    }   
+  }
     addSearchEventListener();
 
 
@@ -100,33 +97,20 @@ function myFunction() {
 
 function addeventlisteners(){
   distance.addEventListener("change", () => {
- const selectedDistance = distance.value;
+    const selectedDistance = distance.value;
     console.log(selectedDistance);
-
-
-
-
   })
 
   powerOutlet.addEventListener("change", () =>{
     const selectedOutlet = powerOutlet.value;
     console.log(selectedOutlet);
 
-
-
-
-
   })
   numPeople.addEventListener("change", () => {
     const selectedPeople = numPeople.value;
     console.log(selectedPeople);
-
-
-
-
   })
   
- 
   optionClick.addEventListener("click",  () => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString);
@@ -138,13 +122,9 @@ function addeventlisteners(){
     powerOutlet.value = newOutlet;
     numPeople.value = newPeople;
 
- 
+  })
 
-   })
-
-
-
-  }
+}
 
 addeventlisteners();
 

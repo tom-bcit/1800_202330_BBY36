@@ -49,10 +49,7 @@ function displayCardsDynamically(collection, list) {
                     var longitude = doc.data().longitude;       // get value of the "longitude" key
                     var spaceCode = doc.data().code;    //get unique ID to each space to be used for fetching right image
                     var spaceStatus = doc.data().status; //gets the status field
-                    var favorite;
-                   
                     
-
                    
                     var docID = doc.id;
                     currentUser.get().then(userDoc => {
