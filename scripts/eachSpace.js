@@ -69,6 +69,11 @@ function myMap() {
 
         // Now that mapProp is defined and we have confirmed the document exists, instantiate the map
         var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        var marker = new google.maps.Marker({
+          position: mapProp.center, // Use the center from mapProp
+          map: map,
+          title: spaceName // Use the spaceName for the marker title
+        });
       } else {
         console.log("No such document!");
       }
