@@ -175,3 +175,16 @@
   height: 15vh;
   overflow: hidden;
 }
+.map{
+  width:50%;
+  height:400px;
+  margin-left: 50px;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  margin-top: auto;
+  border-radius: 50%;
+  display: inline-block;
+}
