@@ -72,6 +72,7 @@ function myMap() {
             zoom: 18,
           };
         }
+        
 
         if (spaceStatus === 'green') {
           statusDot.style.backgroundColor = 'green';
@@ -83,6 +84,12 @@ function myMap() {
 
         //Initialize the map with mapProp...
         var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+        var marker = new google.maps.Marker({
+          position: mapProp.center, // Use the center from mapProp
+          map: map,
+          title: spaceName // Use the spaceName for the marker title
+        });
       } else {
         console.log("No such document!");
       }
@@ -102,7 +109,7 @@ function changeColor() {
   if (ID) {
     db.collection("spaces").doc(ID).get().then(doc => {
       if (doc.exists) {
-        var spaceStatus = doc.data().status; // Assuming status is also fetched from the database
+        var spaceStatus = doc.data().status; 
         var statusDot = document.getElementById('statusDot');
         if (spaceStatus === 'green') {
           var confirmation = confirm("Are you sure you want to study at this location?");
