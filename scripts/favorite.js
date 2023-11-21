@@ -38,7 +38,9 @@ function insertNameFromFirestore() {
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("spaceCardTemplate"); // Retrieve the HTML element with the ID "spaceCardTemplate" and store it in the cardTemplate variable. 
     if (cardTemplate) {
-        db.collection(collection).get()   //the collection called "spaces"
+        db.collection(collection)
+        .orderBy("status")
+        .get()   //the collection called "spaces"
             .then(allSpaces => {
                 //var i = 1;  //Optional: if you want to have a unique ID for each space
                 allSpaces.forEach(doc => { //iterate thru each doc
@@ -67,7 +69,7 @@ function displayCardsDynamically(collection) {
                             document.getElementById(collection + "-go-here").appendChild(newcard);
                             document.getElementById('save-' + docID).innerText = "";
                             let img = document.createElement("img");
-                            img.src = "./images/star.png";
+                            img.src = "./images/heart.png";
                             img.className = "img-fluid"
                             document.getElementById('save-' + docID).append(img);
                         }
@@ -102,7 +104,7 @@ function saveFavorite(hikeDocID) {
                     //this is to change the icon of the hike that was saved to "filled"
                     document.getElementById('save-' + hikeDocID).innerText = "";
                     let img = document.createElement("img");
-                    img.src = "./images/empty_star.png";
+                    img.src = "./images/empty_heart.png";
                     img.className = "img-fluid"
                     document.getElementById('save-' + hikeDocID).append(img);
                 });
@@ -122,7 +124,7 @@ function saveFavorite(hikeDocID) {
                     //this is to change the icon of the hike that was saved to "filled"
                     document.getElementById('save-' + hikeDocID).innerText = "";
                     let img = document.createElement("img");
-                    img.src = "./images/star.png";
+                    img.src = "./images/heart.png";
                     img.className = "img-fluid"
                     document.getElementById('save-' + hikeDocID).append(img);
                 });

@@ -188,3 +188,33 @@
   border-radius: 50%;
   display: inline-block;
 }
+
+.center {
+  align-self: center;
+}
+
+.grid {
+  display: grid;
+}
+
+.card-body {
+  padding: 0;
+}
+
+.col-9 {
+  padding: 0;
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+
+.col-3 {
+  padding: 0;
+}
+
+.row {
+  padding: 0;
+}
+
+.img-fluid {
+  width: 80%;
+}
