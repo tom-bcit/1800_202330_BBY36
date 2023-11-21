@@ -38,7 +38,9 @@ function insertNameFromFirestore() {
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("spaceCardTemplate"); // Retrieve the HTML element with the ID "spaceCardTemplate" and store it in the cardTemplate variable. 
     if (cardTemplate) {
-        db.collection(collection).get()   //the collection called "spaces"
+        db.collection(collection)
+        .orderBy("status")
+        .get()   //the collection called "spaces"
             .then(allSpaces => {
                 //var i = 1;  //Optional: if you want to have a unique ID for each space
                 allSpaces.forEach(doc => { //iterate thru each doc
@@ -57,7 +59,13 @@ function displayCardsDynamically(collection) {
                             //update title and text and image
                             newcard.querySelector('.card-title').innerHTML = title;
                             newcard.querySelector('.distance').innerHTML = measure(longitude, latitude);
-                            newcard.querySelector('.card-image').classList.add(spaceStatus);
+                            newcard.querySelector('.img_container').classList.add(spaceStatus);
+                            newcard.querySelector('.status_text').id = spaceStatus;
+                            if (spaceStatus == "green") {
+                                newcard.querySelector('.status_text').innerHTML = "Available Now";
+                            } else {
+                                newcard.querySelector('.status_text').innerHTML = "Busy";
+                            }
                             newcard.querySelector('.card-image').src = `./images/${spaceCode}.jpg`; //Example: NV01.jpg
                             newcard.querySelector('.card').id = docID;
                             newcard.querySelector('.favorite').id = 'save-' + docID;
@@ -67,7 +75,7 @@ function displayCardsDynamically(collection) {
                             document.getElementById(collection + "-go-here").appendChild(newcard);
                             document.getElementById('save-' + docID).innerText = "";
                             let img = document.createElement("img");
-                            img.src = "./images/star.png";
+                            img.src = "./images/heart.png";
                             img.className = "img-fluid"
                             document.getElementById('save-' + docID).append(img);
                         }
@@ -102,7 +110,7 @@ function saveFavorite(hikeDocID) {
                     //this is to change the icon of the hike that was saved to "filled"
                     document.getElementById('save-' + hikeDocID).innerText = "";
                     let img = document.createElement("img");
-                    img.src = "./images/empty_star.png";
+                    img.src = "./images/empty_heart.png";
                     img.className = "img-fluid"
                     document.getElementById('save-' + hikeDocID).append(img);
                 });
@@ -122,7 +130,7 @@ function saveFavorite(hikeDocID) {
                     //this is to change the icon of the hike that was saved to "filled"
                     document.getElementById('save-' + hikeDocID).innerText = "";
                     let img = document.createElement("img");
-                    img.src = "./images/star.png";
+                    img.src = "./images/heart.png";
                     img.className = "img-fluid"
                     document.getElementById('save-' + hikeDocID).append(img);
                 });
