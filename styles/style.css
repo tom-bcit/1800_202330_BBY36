@@ -176,13 +176,13 @@
   overflow: hidden;
 }
 .map{
-  width:50%;
+  width:90%;
   height:400px;
   margin-left: 50px;
 }
 
 .dot {
-  height: 15px;
+  height: 20px;
   width: 15px;
   margin-top: auto;
   border-radius: 50%;
