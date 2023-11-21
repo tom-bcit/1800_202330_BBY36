@@ -163,10 +163,6 @@
   border: 10px green solid;
 }
 
-.yellow {
-  border: 10px rgb(239, 239, 0) solid;
-}
-
 .red {
   border: 10px red solid;
 }
@@ -217,4 +213,31 @@
 
 .img-fluid {
   width: 80%;
+}
+
+.img_container {
+  position: relative;
+  text-align: center;
+  font-size: 45pt;
+  text-shadow: 2px 2px black;
+}
+
+#green {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: green;
+}
+
+#red {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
+}
+
+.card-image {
+  opacity: 0.5;
 }

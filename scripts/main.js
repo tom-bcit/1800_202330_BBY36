@@ -73,7 +73,13 @@ function displayCardsDynamically(collection) {
                     //update title and text and image
                     newcard.querySelector('.card-title').innerHTML = title;
                     newcard.querySelector('.distance').innerHTML = measure(longitude, latitude);    
-                    newcard.querySelector('.card-image').classList.add(spaceStatus);
+                    newcard.querySelector('.img_container').classList.add(spaceStatus);
+                    newcard.querySelector('.status_text').id = spaceStatus;
+                    if (spaceStatus == "green") {
+                        newcard.querySelector('.status_text').innerHTML = "Available Now";
+                    } else {
+                        newcard.querySelector('.status_text').innerHTML = "Busy";
+                    }
                     newcard.querySelector('.card-image').src = `./images/${spaceCode}.jpg`; //Example: NV01.jpg
                     newcard.querySelector('.card').id = docID;
                     newcard.querySelector('.favorite').id = 'save-' + docID;
