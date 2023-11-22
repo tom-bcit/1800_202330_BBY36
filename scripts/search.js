@@ -54,7 +54,53 @@ window.onclick = function (event) {
     }
   }
 }
+const spaceOutlet = new Array(5);
+const capacity = new Array(5);
 
+var db = firebase.firestore();
+
+// Reference to a Firestore collection
+var collectionRef = db.collection("spaces ");
+
+// Get all documents in the collection
+collectionRef.get().then(function(querySnapshot) {
+  querySnapshot.forEach(function(doc) {
+    // doc.data() is the data of the document
+    var data = doc.data();
+    console.log(data);
+  });
+}).catch(function(error) {
+  console.error("Error getting documents: ", error);
+});
+
+
+function getDocVariables(){
+  collectionRef.get()
+  .then(function(querySnapshot){
+    querySnapshot.forEach(function (doc) {
+      if(querySnapshot){
+        spaceOutlet.push(doc.data().power_outlet);
+        capacity.push(doc.data().capacity);
+       }
+    })
+   
+
+
+
+
+  })
+  for(let i =0; i<spaceOutlet.length;i++){
+
+    console.log(spaceOutlet[i]);
+    console.log(capacity[i]);
+    
+  }
+  }
+
+  
+  
+  
+  getDocVariables();
 
 
 ///-------------------------------------------------
@@ -117,10 +163,25 @@ function addeventlisteners() {
     let newDistance = urlParams.get('filter1');
     let newOutlet = urlParams.get('filter2');
     let newPeople = urlParams.get('filter3');
+    console.log(newOutlet);
 
     distance.value = newDistance;
     powerOutlet.value = newOutlet;
     numPeople.value = newPeople;
+    
+    
+    db.collection( "spaces" )
+    .get()
+    .then( doc => {
+
+      if (spacePowerOutlet  == newOutlet) {
+        console.log("yes");
+      } else {
+        
+      }
+
+
+    })
   })
 }
 
@@ -152,5 +213,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.error("Elements not found");
   }
 });
+
+
 
 
