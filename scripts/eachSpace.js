@@ -43,6 +43,7 @@ function saveSpaceDocumentIDAndRedirect() {
   localStorage.setItem('spaceDocID', ID);
 }
 
+
 function myMap() {
   // Retrieve ID from the URL parameters just like in displaySpaceInfo
   let params = new URL(window.location.href);
@@ -63,15 +64,16 @@ function myMap() {
           };
         } else if (spaceName == "SW1 - Room 1") {
           mapProp = {
-            center: new google.maps.LatLng(49.251014057113906, -123.00266313271943),
+            center: new google.maps.LatLng(49.2510472232236, -123.00320133887256),
             zoom: 18,
           };
         } else if (spaceName == "NE1 - Room 1") {
           mapProp = {
-            center: new google.maps.LatLng(49.25411087424854, -123.00095403610528),
+            center: new google.maps.LatLng(49.254208910058054, -123.00137242755098),
             zoom: 18,
           };
         }
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
         if (spaceStatus === 'green') {
           statusDot.style.backgroundColor = 'green';
@@ -81,8 +83,22 @@ function myMap() {
           statusDot.style.backgroundColor = 'yellow';
         }
 
-        //Initialize the map with mapProp...
-        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+       var marker = new google.maps.Marker({
+        position: mapProp.center,
+        map: map,
+        title: "Your Marker Title",
+      });
+       
+      var infowindow = new google.maps.InfoWindow({
+        content: spaceName,
+      });
+
+      // Attach a click event listener to the marker
+      marker.addListener("click", function() {
+        // Open a link to Google Maps with the specified location coordinates
+        window.open("https://www.google.com/maps?q=" + mapProp.center.lat() + "," + mapProp.center.lng());
+      });
+    
       } else {
         console.log("No such document!");
       }
@@ -95,6 +111,7 @@ function myMap() {
 
 }
 
+
 function changeColor() {
   let params = new URL(window.location.href);
   let ID = params.searchParams.get("docID");
@@ -102,7 +119,7 @@ function changeColor() {
   if (ID) {
     db.collection("spaces").doc(ID).get().then(doc => {
       if (doc.exists) {
-        var spaceStatus = doc.data().status; // Assuming status is also fetched from the database
+        var spaceStatus = doc.data().status;
         var statusDot = document.getElementById('statusDot');
         if (spaceStatus === 'green') {
           var confirmation = confirm("Are you sure you want to study at this location?");
@@ -139,9 +156,9 @@ function Nexttimebutton() {
   if (ID) {
     db.collection("spaces").doc(ID).get().then(doc => {
       if (doc.exists) {
-        var spaceStatus = doc.data().status; 
+        var spaceStatus = doc.data().status;
         var statusDot = document.getElementById('statusDot');
-        
+
         if (spaceStatus === 'green') {
           statusDot.style.backgroundColor = 'green';
         } else if (spaceStatus === 'red') {
@@ -150,8 +167,8 @@ function Nexttimebutton() {
           statusDot.style.backgroundColor = 'yellow';
         }
       }
-  })
-}
+    })
+  }
 }
 
 

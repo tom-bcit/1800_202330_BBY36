@@ -163,10 +163,6 @@
   border: 10px green solid;
 }
 
-.yellow {
-  border: 10px rgb(239, 239, 0) solid;
-}
-
 .red {
   border: 10px red solid;
 }
@@ -176,15 +172,72 @@
   overflow: hidden;
 }
 .map{
-  width:50%;
+  width:90%;
   height:400px;
   margin-left: 50px;
 }
 
 .dot {
-  height: 15px;
+  height: 20px;
   width: 15px;
   margin-top: auto;
   border-radius: 50%;
   display: inline-block;
+}
+
+.center {
+  align-self: center;
+}
+
+.grid {
+  display: grid;
+}
+
+.card-body {
+  padding: 0;
+}
+
+.col-9 {
+  padding: 0;
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+
+.col-3 {
+  padding: 0;
+}
+
+.row {
+  padding: 0;
+}
+
+.img-fluid {
+  width: 80%;
+}
+
+.img_container {
+  position: relative;
+  text-align: center;
+  font-size: 45pt;
+  text-shadow: 2px 2px black;
+}
+
+#green {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: green;
+}
+
+#red {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
+}
+
+.card-image {
+  opacity: 0.5;
 }
