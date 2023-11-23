@@ -1,5 +1,4 @@
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
+
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
@@ -54,53 +53,9 @@ window.onclick = function (event) {
     }
   }
 }
-const spaceOutlet = new Array(5);
-const capacity = new Array(5);
-
-var db = firebase.firestore();
-
-// Reference to a Firestore collection
-var collectionRef = db.collection("spaces ");
-
-// Get all documents in the collection
-collectionRef.get().then(function(querySnapshot) {
-  querySnapshot.forEach(function(doc) {
-    // doc.data() is the data of the document
-    var data = doc.data();
-    console.log(data);
-  });
-}).catch(function(error) {
-  console.error("Error getting documents: ", error);
-});
 
 
-function getDocVariables(){
-  collectionRef.get()
-  .then(function(querySnapshot){
-    querySnapshot.forEach(function (doc) {
-      if(querySnapshot){
-        spaceOutlet.push(doc.data().power_outlet);
-        capacity.push(doc.data().capacity);
-       }
-    })
-   
-
-
-
-
-  })
-  for(let i =0; i<spaceOutlet.length;i++){
-
-    console.log(spaceOutlet[i]);
-    console.log(capacity[i]);
-    
-  }
-  }
-
-  
-  
-  
-  getDocVariables();
+ 
 
 
 ///-------------------------------------------------
@@ -121,6 +76,35 @@ function addSearchEventListener() {
     })
   }
 }
+
+
+
+// Reference to a Firestore collection
+var collectionRef = db.collection("spaces");
+
+let capacity = [];
+let spaceOutlet = [];
+let docname = [];
+
+function getDocData(){
+collectionRef.get().then((querySnapshot) => {
+  querySnapshot.forEach((doc) => {
+    // Access the data in each document
+    capacity.push(doc.data().capacity);
+    spaceOutlet.push(doc.data().power_outlet);
+    docname.push(doc.id);
+
+   
+
+    // Log the data for each document
+    console.log('Document ID:', doc.id, 'Data:',);
+  });
+  
+})
+
+}
+getDocData();
+
 addSearchEventListener();
 
 
@@ -168,22 +152,30 @@ function addeventlisteners() {
     distance.value = newDistance;
     powerOutlet.value = newOutlet;
     numPeople.value = newPeople;
-    
-    
-    db.collection( "spaces" )
-    .get()
-    .then( doc => {
 
-      if (spacePowerOutlet  == newOutlet) {
-        console.log("yes");
-      } else {
-        
-      }
+    Array.from(document.getElementsByClassName('card')).forEach((card) => {
+
+      for(let i = 0; i< docname.length;i++){
+        if(docname == card.getElementsByClassName())
+
 
 
     })
+      
+      
+      
+
+    
+      
+      
+
+    
+    
+
   })
 }
+
+
 
 addeventlisteners();
 
