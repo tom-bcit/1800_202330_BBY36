@@ -153,27 +153,9 @@ function addeventlisteners() {
     powerOutlet.value = newOutlet;
     numPeople.value = newPeople;
 
-    Array.from(document.getElementsByClassName('card')).forEach((card) => {
-
-      for(let i = 0; i< docname.length;i++){
-        if(docname == card.getElementsByClassName())
-
-
-
-    })
-      
-      
-      
-
     
-      
-      
-
-    
-    
-
   })
-}
+} 
 
 
 
