@@ -23,23 +23,7 @@ function myFunction() {
     }
   }
 }
-function myFunction_ul() {
-  const input = document.querySelector(".form-control");
-  const dropdown = document.getElementById("myUL");
 
-  if (input.value.length > 0) {
-    dropdown.classList.remove("hidden");
-  } else {
-    dropdown.classList.add("hidden");
-  }
-}
-
-
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction_DD() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function (event) {
@@ -152,6 +136,7 @@ function addeventlisteners() {
     distance.value = newDistance;
     powerOutlet.value = newOutlet;
     numPeople.value = newPeople;
+    console.log(numPeople);
 
     
   })
