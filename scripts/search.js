@@ -144,35 +144,22 @@ function addeventlisteners() {
 
 
 
-addeventlisteners();
 
-document.addEventListener('DOMContentLoaded', function () {
-  // get elements by their ID
-  const searchInput = document.getElementById('searchInput');
-  const searchButton = document.getElementById('searchButton');
+function dosearch() {
+  var result = document.getElementById("search-1").value.toLowerCase(); // Get the user's search term
+  // Proceed only if the result is not empty
+  if (result) {
+    // Query the database for all spaces
+    db.collection("spaces").get().then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        var spaceName = doc.data().name.toLowerCase();
 
-  // Check if elements exist
-  if (searchButton && searchInput) {
-    // add event listener to the button
-    searchButton.addEventListener('click', function () {
-      // get the search input value
-      const searchTerm = searchInput.value;
-      console.log(`Searching for "${searchTerm}"...`);
-      window.location.href = 'eachSpace.html' + encodeURIComponent(searchTerm);
+        // If the search term matches the space name
+        if (spaceName ==result ) { 
+          var docID = doc.id;
+          window.location.href = "eachSpace.html?docID="+docID;
+        }
+      });
     });
-
-    // add event listener to the input (if you want to trigger the search on Enter keypress)
-    searchInput.addEventListener('keyup', function (event) {
-      if (event.keyCode === 13) { // Enter key code
-        // simulate a button click to trigger the search
-        searchButton.click();
-      }
-    });
-  } else {
-    console.error("Elements not found");
   }
-});
-
-
-
-
+}
