@@ -247,3 +247,9 @@ function saveFavorite(spaceDocID) {
   })
 
 }
+
+function getDate() {
+  var current = Date.now();
+  document.getElementById('date').innerHTML = new Date(current).toLocaleTimeString('en-US');
+}
+getDate();
