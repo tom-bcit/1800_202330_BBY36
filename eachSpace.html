@@ -50,13 +50,22 @@
             <img class="space-img img-fluid" src="" alt="Space photo">
         </div>
     </div>
-    <div class="mx-5 my-3">
-        <p id="details">description</p>
-        <p>Capacity: Can fit <span id="capacity">Number</span> People</p>
-        <p>Power outlet availability: <span id="powerOutlet">Boolean</span></p>
-        <p>Status: <span id="statusDot" class="dot"></span></p>
-        <p>Do you want to study at this location: </p> <button class="btn btn-outline-success" id="changeStatusButton"  onclick="changeColor()">Yes</button> <button class="btn btn-outline-success" id ="nextTime" onclick="Nexttimebutton()">No</button>
+    <div class="mx-5 my-3" id="each_container">
+        <div class="colB grid">
+            <p class="rowA">Favorite</p>
+            <div class="eachFavorite rowB">heart</div>
+            
+          </div>
+        <div class="colA">
+            <p id="details">description</p>
+            <p>Capacity: Can fit <span id="capacity">Number</span> People</p>
+            <p>Power outlet availability: <span id="powerOutlet">Boolean</span></p>
+            <p>Status: <span id="statusDot" class="dot"></span></p>
+            <p>Do you want to study at this location: </p> <button class="btn btn-outline-success" id="changeStatusButton"  onclick="changeColor()">Yes</button> <button class="btn btn-outline-success" id ="nextTime" onclick="Nexttimebutton()">No</button>
+        </div>
     </div>
+
+
     <div id="googleMap" class = "map"></div>
     <!-- our own footer goes here-->
     <nav id="footerPlaceholder"></nav>

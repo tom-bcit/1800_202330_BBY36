@@ -1,4 +1,5 @@
 
+
 function displaySpaceInfo() {
   let params = new URL(window.location.href); //get URL of search bar
   let ID = params.searchParams.get("docID"); //get value for key "id"
@@ -172,5 +173,77 @@ function Nexttimebutton() {
 }
 
 
+var currentUser;
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+      currentUser = db.collection("users").doc(user.uid); //global
+      favoriteButton();
+  }
+});
+
+function favoriteButton() {
+  let params = new URL(window.location.href);
+  let docID = params.searchParams.get("docID");
+
+  document.querySelector('.eachFavorite').id = 'save-' + docID;
+  currentUser.get().then(userDoc => {
+    //get the user name
+    var favorites = userDoc.data().favorites;
+    if (favorites.includes(docID)) {
+        document.getElementById('save-' + docID).innerText = "";
+        let img = document.createElement("img");
+        img.src = "./images/heart.png";
+        img.className = "img-fluid"
+        document.getElementById('save-' + docID).append(img);
+    } else {
+        document.getElementById('save-' + docID).innerText = "";
+        let img = document.createElement("img");
+        img.src = "./images/empty_heart.png";
+        img.className = "img-fluid"
+        document.getElementById('save-' + docID).append(img);
+    }
+  })
+  document.querySelector('.eachFavorite').onclick = () => saveFavorite(docID);
+}
 
 
+
+function saveFavorite(spaceDocID) {
+  currentUser.get().then(userDoc => {
+      var favorites = userDoc.data().favorites;
+      if (favorites.includes(spaceDocID)) {
+          currentUser.update({
+              favorites: firebase.firestore.FieldValue.arrayRemove(spaceDocID)
+          })
+              // Handle the front-end update to change the icon, providing visual feedback to the user that it has been clicked.
+              .then(function () {
+                  console.log("favorite has been removed for" + spaceDocID);
+                  //this is to change the icon of the space that was saved to "filled"
+                  document.getElementById('save-' + spaceDocID).innerText = "";
+                  let img = document.createElement("img");
+                  img.src = "./images/empty_heart.png";
+                  img.className = "img-fluid"
+                  document.getElementById('save-' + spaceDocID).append(img);
+              });
+      }
+      else {
+          // Manage the backend process to store the spaceDocID in the database, recording which space was favorited by the user.
+          currentUser.update({
+              // Use 'arrayUnion' to add the new favorite ID to the 'favorites' array.
+              // This method ensures that the ID is added only if it's not already present, preventing duplicates.
+              favorites: firebase.firestore.FieldValue.arrayUnion(spaceDocID)
+          })
+              // Handle the front-end update to change the icon, providing visual feedback to the user that it has been clicked.
+              .then(function () {
+                  console.log("favorite has been saved for" + spaceDocID);
+                  //this is to change the icon of the space that was saved to "filled"
+                  document.getElementById('save-' + spaceDocID).innerText = "";
+                  let img = document.createElement("img");
+                  img.src = "./images/heart.png";
+                  img.className = "img-fluid"
+                  document.getElementById('save-' + spaceDocID).append(img);
+              });
+      }
+  })
+
+}

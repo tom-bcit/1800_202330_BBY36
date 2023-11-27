@@ -212,7 +212,7 @@
 }
 
 .img-fluid {
-  width: 80%;
+  width: 100%;
 }
 
 .img_container {
@@ -240,4 +240,33 @@
 
 .card-image {
   opacity: 0.5;
+}
+
+#each_container {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  grid-template-areas: 'colA colB';
+}
+
+.colA {
+  grid-area: colA;
+}
+
+.colB {
+  justify-items: center;
+  display: grid;
+  grid-area: colB;
+  grid-template-rows: 1.5em;
+  grid-template-areas: 'rowA'
+  'rowB';
+}
+
+.rowA {
+  grid-area: rowA;
+}
+
+.rowB {
+  display: grid;
+  grid-area: rowB;
+  justify-self: center;
 }
