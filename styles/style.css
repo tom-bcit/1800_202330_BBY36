@@ -3,6 +3,33 @@
   color: #586994;
 }
 
+form{
+  display:flex;
+}
+
+ form #search-1{
+  display: grid;
+  grid-column: 1 / span 1;
+  grid-row: 1/ span 1;
+
+ }  
+form #button21{
+  display: grid;
+grid-column: 2 /span 1;
+grid-row: 1 /span 1;
+}
+form #searchButton{
+  display: grid;
+  grid-column: 3 /span 1;
+  grid-row: 1/ span 1;
+}
+#form1{
+  position: relative;
+}
+#form1 a{
+  color: #127475;
+  text-decoration: none;
+}
 .bg-info {
   background-color: #BFA4A4 !important;
   /* Medium shade for navbar */
@@ -27,6 +54,10 @@
   
 }
 
+#button2{
+  width: 40%;
+
+}
 .button {
   position: relative;
   background-color: #f5ead8;
@@ -83,17 +114,6 @@
   margin: 0;
 }
 
-#myUL li a {
-  border: 1px solid #ddd;
-  margin-top: -1px;
-  /* Prevent double borders */
-  background-color: #f6f6f6;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px;
-  color: black;
-  display: block
-}
 
 #myUL li a:hover:not(.header) {
   background-color: #eee;

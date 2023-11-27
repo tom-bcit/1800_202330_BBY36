@@ -1,45 +1,17 @@
+const optionClick = document.querySelector("#button21")
 
 function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-
-
-
-
-function myFunction() {
-  var input, filter, ul, li, a, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  ul = document.getElementById("myUL");
-  li = ul.getElementsByTagName("li");
-  for (i = 0; i < li.length; i++) {
-    a = li[i].getElementsByTagName("a")[0];
-    txtValue = a.textContent || a.innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
+  const form = document.getElementById("popUpForm");
+  if (form.classList.contains("d-block")) {
+    form.classList.remove("d-block");
+    form.classList.add("d-none");
+  } else {
+    form.classList.remove("d-none");
+    form.classList.add("d-block");
   }
 }
 
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function (event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-      }
-    }
-  }
-}
-
-
- 
 
 
 ///-------------------------------------------------
@@ -70,21 +42,21 @@ let capacity = [];
 let spaceOutlet = [];
 let docname = [];
 
-function getDocData(){
-collectionRef.get().then((querySnapshot) => {
-  querySnapshot.forEach((doc) => {
-    // Access the data in each document
-    capacity.push(doc.data().capacity);
-    spaceOutlet.push(doc.data().power_outlet);
-    docname.push(doc.id);
+function getDocData() {
+  collectionRef.get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      // Access the data in each document
+      capacity.push(doc.data().capacity);
+      spaceOutlet.push(doc.data().power_outlet);
+      docname.push(doc.id);
 
-   
 
-    // Log the data for each document
-    console.log('Document ID:', doc.id, 'Data:',);
-  });
-  
-})
+
+      // Log the data for each document
+      console.log('Document ID:', doc.id, 'Data:',);
+    });
+
+  })
 
 }
 getDocData();
@@ -102,13 +74,12 @@ const distance = document.querySelector("#filter")
 const powerOutlet = document.querySelector("#filter2")
 const numPeople = document.querySelector("#filter3")
 const resultSearch = document.querySelector("#result-list")
-const optionClick = document.querySelector("#button21")
 
 
 
 
 
-function addeventlisteners() {
+function addEventListeners() {
   distance.addEventListener("change", () => {
     const selectedDistance = distance.value;
     console.log(selectedDistance);
@@ -138,13 +109,18 @@ function addeventlisteners() {
     numPeople.value = newPeople;
     console.log(numPeople);
 
-    
+
+    Array.from(document.getElementsByClassName('card')).forEach((card) => {
+      console.log(card.id)
+
+    })
+
   })
-} 
+}
 
 
 
-addeventlisteners();
+addEventListeners();
 
 document.addEventListener('DOMContentLoaded', function () {
   // get elements by their ID
