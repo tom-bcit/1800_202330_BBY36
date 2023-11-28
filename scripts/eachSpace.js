@@ -60,16 +60,19 @@ function myMap() {
 
         if (spaceName == "SE12 - Room 1") {
           mapProp = {
+            spaceName: "BCIT SE12",
             center: new google.maps.LatLng(49.25001012909419, -123.00152632908595),
             zoom: 18,
           };
         } else if (spaceName == "SW1 - Room 1") {
           mapProp = {
+            spaceName: "Building SW1",
             center: new google.maps.LatLng(49.2510472232236, -123.00320133887256),
             zoom: 18,
           };
         } else if (spaceName == "NE1 - Room 1") {
           mapProp = {
+            spaceName: "BCIT NE1",
             center: new google.maps.LatLng(49.254208910058054, -123.00137242755098),
             zoom: 18,
           };
@@ -87,7 +90,7 @@ function myMap() {
        var marker = new google.maps.Marker({
         position: mapProp.center,
         map: map,
-        title: "Your Marker Title",
+        title: spaceName,
       });
        
       var infowindow = new google.maps.InfoWindow({
@@ -97,7 +100,8 @@ function myMap() {
       // Attach a click event listener to the marker
       marker.addListener("click", function() {
         // Open a link to Google Maps with the specified location coordinates
-        window.open("https://www.google.com/maps?q=" + mapProp.center.lat() + "," + mapProp.center.lng());
+            
+            window.open("https://www.google.com/maps?q=" + mapProp.spaceName);
       });
     
       } else {
