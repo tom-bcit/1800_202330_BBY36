@@ -29,18 +29,13 @@ function insertNameFromFirestore() {
     })
 }
 
-//------------------------------------------------------------------------------
-// Input parameter is a string representing the collection we are reading from
-//----------------------------------------------------------    --------------------
-
-
-
+// Creates cards from database to be displayed on page
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("spaceCardTemplate"); // Retrieve the HTML element with the ID "spaceCardTemplate" and store it in the cardTemplate variable. 
     if (cardTemplate) {
         db.collection(collection)
-        .orderBy("status")
-        .get()   //the collection called "spaces"
+            .orderBy("status")
+            .get()   //the collection called "spaces"
             .then(allSpaces => {
                 //var i = 1;  //Optional: if you want to have a unique ID for each space
                 allSpaces.forEach(doc => { //iterate thru each doc
@@ -72,7 +67,7 @@ function displayCardsDynamically(collection) {
 
                     //update title and text and image
                     newcard.querySelector('.card-title').innerHTML = title;
-                    newcard.querySelector('.distance').innerHTML = measure(longitude, latitude);    
+                    newcard.querySelector('.distance').innerHTML = measure(longitude, latitude);
                     newcard.querySelector('.img_container').classList.add(spaceStatus);
                     newcard.querySelector('.status_text').id = spaceStatus;
                     if (spaceStatus == "green") {
@@ -99,6 +94,7 @@ function displayCardsDynamically(collection) {
     }
 }
 
+// calculates distance in meters from longitude and latitude
 function measure(longitude, latitude) {
     let deltaLat = (parseFloat(localStorage.getItem("latitude")) - latitude);
     let deltaLon = (parseFloat(localStorage.getItem("longitude")) - longitude);
@@ -108,6 +104,7 @@ function measure(longitude, latitude) {
     return Math.sqrt((Math.pow(deltaLat * m_per_deg_lat, 2)) + (Math.pow(deltaLon * m_per_deg_lon, 2)));
 }
 
+// Adds/removes a favorite from a user in the database and makes the visual change to correct state
 function saveFavorite(spaceDocID) {
     currentUser.get().then(userDoc => {
         var favorites = userDoc.data().favorites;
@@ -145,9 +142,9 @@ function saveFavorite(spaceDocID) {
                 });
         }
     })
-
 }
 
+// Gets current time and inserts into page
 function getDate() {
     var current = Date.now();
     document.getElementById('date').innerHTML = new Date(current).toLocaleTimeString('en-US');

@@ -1,5 +1,5 @@
 
-
+// Gets information from database to populate each field on eachSpace.html
 function displaySpaceInfo() {
   let params = new URL(window.location.href); //get URL of search bar
   let ID = params.searchParams.get("docID"); //get value for key "id"
@@ -37,14 +37,14 @@ function displaySpaceInfo() {
 displaySpaceInfo();
 
 
-
+// Grabs docID from URL and adds to localStorage
 function saveSpaceDocumentIDAndRedirect() {
   let params = new URL(window.location.href) //get the url from the search bar
   let ID = params.searchParams.get("docID");
   localStorage.setItem('spaceDocID', ID);
 }
 
-
+// Responsible for all google map functions
 function myMap() {
   // Retrieve ID from the URL parameters just like in displaySpaceInfo
   let params = new URL(window.location.href);
@@ -84,22 +84,22 @@ function myMap() {
           statusDot.style.backgroundColor = 'yellow';
         }
 
-       var marker = new google.maps.Marker({
-        position: mapProp.center,
-        map: map,
-        title: "Your Marker Title",
-      });
-       
-      var infowindow = new google.maps.InfoWindow({
-        content: spaceName,
-      });
+        var marker = new google.maps.Marker({
+          position: mapProp.center,
+          map: map,
+          title: "Your Marker Title",
+        });
 
-      // Attach a click event listener to the marker
-      marker.addListener("click", function() {
-        // Open a link to Google Maps with the specified location coordinates
-        window.open("https://www.google.com/maps?q=" + mapProp.center.lat() + "," + mapProp.center.lng());
-      });
-    
+        var infowindow = new google.maps.InfoWindow({
+          content: spaceName,
+        });
+
+        // Attach a click event listener to the marker
+        marker.addListener("click", function () {
+          // Open a link to Google Maps with the specified location coordinates
+          window.open("https://www.google.com/maps?q=" + mapProp.center.lat() + "," + mapProp.center.lng());
+        });
+
       } else {
         console.log("No such document!");
       }
@@ -112,7 +112,7 @@ function myMap() {
 
 }
 
-
+// Creates popup confirmation message
 function changeColor() {
   let params = new URL(window.location.href);
   let ID = params.searchParams.get("docID");
@@ -151,6 +151,7 @@ function changeColor() {
   }
 }
 
+// Changes color of status dot
 function Nexttimebutton() {
   let params = new URL(window.location.href);
   let ID = params.searchParams.get("docID");
@@ -172,15 +173,16 @@ function Nexttimebutton() {
   }
 }
 
-
+// Gets needed data for favoriteButton()
 var currentUser;
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
-      currentUser = db.collection("users").doc(user.uid); //global
-      favoriteButton();
+    currentUser = db.collection("users").doc(user.uid); //global
+    favoriteButton();
   }
 });
 
+// Adds the onclick favorite functionality and visual change
 function favoriteButton() {
   let params = new URL(window.location.href);
   let docID = params.searchParams.get("docID");
@@ -190,64 +192,64 @@ function favoriteButton() {
     //get the user name
     var favorites = userDoc.data().favorites;
     if (favorites.includes(docID)) {
-        document.getElementById('save-' + docID).innerText = "";
-        let img = document.createElement("img");
-        img.src = "./images/heart.png";
-        img.className = "img-fluid"
-        document.getElementById('save-' + docID).append(img);
+      document.getElementById('save-' + docID).innerText = "";
+      let img = document.createElement("img");
+      img.src = "./images/heart.png";
+      img.className = "img-fluid"
+      document.getElementById('save-' + docID).append(img);
     } else {
-        document.getElementById('save-' + docID).innerText = "";
-        let img = document.createElement("img");
-        img.src = "./images/empty_heart.png";
-        img.className = "img-fluid"
-        document.getElementById('save-' + docID).append(img);
+      document.getElementById('save-' + docID).innerText = "";
+      let img = document.createElement("img");
+      img.src = "./images/empty_heart.png";
+      img.className = "img-fluid"
+      document.getElementById('save-' + docID).append(img);
     }
   })
   document.querySelector('.eachFavorite').onclick = () => saveFavorite(docID);
 }
 
-
-
+// Changes the favorites in database to reflect changes on screen 
 function saveFavorite(spaceDocID) {
   currentUser.get().then(userDoc => {
-      var favorites = userDoc.data().favorites;
-      if (favorites.includes(spaceDocID)) {
-          currentUser.update({
-              favorites: firebase.firestore.FieldValue.arrayRemove(spaceDocID)
-          })
-              // Handle the front-end update to change the icon, providing visual feedback to the user that it has been clicked.
-              .then(function () {
-                  console.log("favorite has been removed for" + spaceDocID);
-                  //this is to change the icon of the space that was saved to "filled"
-                  document.getElementById('save-' + spaceDocID).innerText = "";
-                  let img = document.createElement("img");
-                  img.src = "./images/empty_heart.png";
-                  img.className = "img-fluid"
-                  document.getElementById('save-' + spaceDocID).append(img);
-              });
-      }
-      else {
-          // Manage the backend process to store the spaceDocID in the database, recording which space was favorited by the user.
-          currentUser.update({
-              // Use 'arrayUnion' to add the new favorite ID to the 'favorites' array.
-              // This method ensures that the ID is added only if it's not already present, preventing duplicates.
-              favorites: firebase.firestore.FieldValue.arrayUnion(spaceDocID)
-          })
-              // Handle the front-end update to change the icon, providing visual feedback to the user that it has been clicked.
-              .then(function () {
-                  console.log("favorite has been saved for" + spaceDocID);
-                  //this is to change the icon of the space that was saved to "filled"
-                  document.getElementById('save-' + spaceDocID).innerText = "";
-                  let img = document.createElement("img");
-                  img.src = "./images/heart.png";
-                  img.className = "img-fluid"
-                  document.getElementById('save-' + spaceDocID).append(img);
-              });
-      }
+    var favorites = userDoc.data().favorites;
+    if (favorites.includes(spaceDocID)) {
+      currentUser.update({
+        favorites: firebase.firestore.FieldValue.arrayRemove(spaceDocID)
+      })
+        // Handle the front-end update to change the icon, providing visual feedback to the user that it has been clicked.
+        .then(function () {
+          console.log("favorite has been removed for" + spaceDocID);
+          //this is to change the icon of the space that was saved to "filled"
+          document.getElementById('save-' + spaceDocID).innerText = "";
+          let img = document.createElement("img");
+          img.src = "./images/empty_heart.png";
+          img.className = "img-fluid"
+          document.getElementById('save-' + spaceDocID).append(img);
+        });
+    }
+    else {
+      // Manage the backend process to store the spaceDocID in the database, recording which space was favorited by the user.
+      currentUser.update({
+        // Use 'arrayUnion' to add the new favorite ID to the 'favorites' array.
+        // This method ensures that the ID is added only if it's not already present, preventing duplicates.
+        favorites: firebase.firestore.FieldValue.arrayUnion(spaceDocID)
+      })
+        // Handle the front-end update to change the icon, providing visual feedback to the user that it has been clicked.
+        .then(function () {
+          console.log("favorite has been saved for" + spaceDocID);
+          //this is to change the icon of the space that was saved to "filled"
+          document.getElementById('save-' + spaceDocID).innerText = "";
+          let img = document.createElement("img");
+          img.src = "./images/heart.png";
+          img.className = "img-fluid"
+          document.getElementById('save-' + spaceDocID).append(img);
+        });
+    }
   })
 
 }
 
+// Gets current time and inserts into page
 function getDate() {
   var current = Date.now();
   document.getElementById('date').innerHTML = new Date(current).toLocaleTimeString('en-US');
