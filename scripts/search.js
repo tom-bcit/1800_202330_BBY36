@@ -1,25 +1,11 @@
 const optionClick = document.querySelector("#button21")
 
-function myFunction() {
-  const form = document.getElementById("popUpForm");
-  if (form.classList.contains("d-block")) {
-    form.classList.remove("d-block");
-    form.classList.add("d-none");
-  } else {
-    form.classList.remove("d-none");
-    form.classList.add("d-block");
-  }
-}
-
-
-
-
 ///-------------------------------------------------
 ///FOR SEARCH BAR CHECKS WHAT INPUT IT
 ///---------------------------------------------------
 const searchInput = document.querySelector(".me-2");
 
-
+// Hides cards that do not match search text in search bar
 function addSearchEventListener() {
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
@@ -32,8 +18,7 @@ function addSearchEventListener() {
     })
   }
 }
-
-
+addSearchEventListener();
 
 // Reference to a Firestore collection
 var collectionRef = db.collection("spaces");
@@ -42,6 +27,7 @@ let capacity = [];
 let spaceOutlet = [];
 let docname = [];
 
+// 
 function getDocData() {
   collectionRef.get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
@@ -50,24 +36,16 @@ function getDocData() {
       spaceOutlet.push(doc.data().power_outlet);
       docname.push(doc.id);
 
-
-
       // Log the data for each document
       console.log('Document ID:', doc.id, 'Data:',);
     });
-
   })
-
 }
 getDocData();
-
-addSearchEventListener();
-
 
 //
 //  DROPDOWN FOR OPTIONS SAVES THEM
 //
-
 
 let applyVar = document.querySelector("#button2")
 const distance = document.querySelector("#filter")
@@ -103,7 +81,6 @@ function addEventListeners() {
       selectedPeople = numPeople.value;
     console.log(selectedPeople);
   })
-
 
   optionClick.addEventListener("click", () => {
     // Get the current URL parameters
@@ -173,9 +150,9 @@ function dosearch() {
         var spaceName = doc.data().name.toLowerCase();
 
         // If the search term matches the space name
-        if (spaceName ==result ) { 
+        if (spaceName == result) {
           var docID = doc.id;
-          window.location.href = "eachSpace.html?docID="+docID;
+          window.location.href = "eachSpace.html?docID=" + docID;
         }
       });
     });
