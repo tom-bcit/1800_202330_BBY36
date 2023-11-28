@@ -1,5 +1,6 @@
 getLocation();
 
+// Gets user's geolocation
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
@@ -8,6 +9,7 @@ function getLocation() {
   }
 }
 
+// Saves geolocation data to localStorage
 function showPosition(position) {
   localStorage.setItem('latitude', position.coords.latitude);
   localStorage.setItem('longitude', position.coords.longitude);

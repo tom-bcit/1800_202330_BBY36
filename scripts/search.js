@@ -11,9 +11,6 @@ function myFunction() {
   }
 }
 
-
-
-
 ///-------------------------------------------------
 ///FOR SEARCH BAR CHECKS WHAT INPUT IT
 ///---------------------------------------------------
@@ -32,8 +29,6 @@ function addSearchEventListener() {
     })
   }
 }
-
-
 
 // Reference to a Firestore collection
 var collectionRef = db.collection("spaces");
@@ -75,10 +70,6 @@ const powerOutlet = document.querySelector("#filter2")
 const numPeople = document.querySelector("#filter3")
 const resultSearch = document.querySelector("#result-list")
 
-
-
-
-
 function addEventListeners() {
   distance.addEventListener("change", () => {
     const selectedDistance = distance.value;
@@ -95,7 +86,6 @@ function addEventListeners() {
     console.log(selectedPeople);
   })
 
-
   optionClick.addEventListener("click", () => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString);
@@ -108,13 +98,8 @@ function addEventListeners() {
     powerOutlet.value = newOutlet;
     numPeople.value = newPeople;
     console.log(numPeople);
-
-    
   })
-} 
-
-
-
+}
 
 function dosearch() {
   var result = document.getElementById("search-1").value.toLowerCase(); // Get the user's search term
@@ -126,9 +111,9 @@ function dosearch() {
         var spaceName = doc.data().name.toLowerCase();
 
         // If the search term matches the space name
-        if (spaceName ==result ) { 
+        if (spaceName == result) {
           var docID = doc.id;
-          window.location.href = "eachSpace.html?docID="+docID;
+          window.location.href = "eachSpace.html?docID=" + docID;
         }
       });
     });
