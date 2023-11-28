@@ -58,6 +58,10 @@ form #searchButton{
   width: 40%;
 
 }
+#button12{
+  width: 40%;
+
+}
 .button {
   position: relative;
   background-color: #f5ead8;
@@ -96,6 +100,14 @@ form #searchButton{
 * {
   box-sizing: border-box;
 }
+form a {
+  color: #127475;
+  text-decoration: none;
+  text-align: left;
+ }
+ #button2{
+  display: inline;
+ }
 
 #myInput {
   background-image: url('/css/searchicon.png');
@@ -226,7 +238,9 @@ form #searchButton{
 .col-3 {
   padding: 0;
 }
-
+#button2{
+  display: inline;  
+}
 .row {
   padding: 0;
 }

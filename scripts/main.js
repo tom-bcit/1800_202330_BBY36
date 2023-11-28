@@ -49,10 +49,10 @@ function displayCardsDynamically(collection) {
                     var longitude = doc.data().longitude;       // get value of the "longitude" key
                     var spaceCode = doc.data().code;    //get unique ID to each space to be used for fetching right image
                     var spaceStatus = doc.data().status; //gets the status field
-
                     var docID = doc.id;
                     currentUser.get().then(userDoc => {
                         //get the user name
+
                         var favorites = userDoc.data().favorites;
                         if (favorites.includes(docID)) {
                             document.getElementById('save-' + docID).innerText = "";
@@ -81,7 +81,7 @@ function displayCardsDynamically(collection) {
                         newcard.querySelector('.status_text').innerHTML = "Busy";
                     }
                     newcard.querySelector('.card-image').src = `./images/${spaceCode}.jpg`; //Example: NV01.jpg
-                    newcard.querySelector('.card').id = docID;
+                    newcard.querySelector('.card').id = docID + "_" + doc.data()?.capacity + "_" + doc.data()?.power_outlet;
                     newcard.querySelector('.favorite').id = 'save-' + docID;
                     newcard.querySelector('.favorite').onclick = () => saveFavorite(docID);
                     newcard.querySelector('a').href = "eachSpace.html?docID=" + docID;
