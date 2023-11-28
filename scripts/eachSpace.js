@@ -87,7 +87,6 @@ function myMap() {
           statusDot.style.backgroundColor = 'yellow';
         }
 
-<<<<<<< HEAD
        var marker = new google.maps.Marker({
         position: mapProp.center,
         map: map,
@@ -105,24 +104,6 @@ function myMap() {
             window.open("https://www.google.com/maps?q=" + mapProp.spaceName);
       });
     
-=======
-        var marker = new google.maps.Marker({
-          position: mapProp.center,
-          map: map,
-          title: "Your Marker Title",
-        });
-
-        var infowindow = new google.maps.InfoWindow({
-          content: spaceName,
-        });
-
-        // Attach a click event listener to the marker
-        marker.addListener("click", function () {
-          // Open a link to Google Maps with the specified location coordinates
-          window.open("https://www.google.com/maps?q=" + mapProp.center.lat() + "," + mapProp.center.lng());
-        });
-
->>>>>>> 8818f3c97a08b0d6668578b2bd2b520a159790d1
       } else {
         console.log("No such document!");
       }
@@ -132,7 +113,6 @@ function myMap() {
   } else {
     console.log("Document ID is not provided in the URL parameters.");
   }
-
 }
 
 // Creates popup confirmation message
