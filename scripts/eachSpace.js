@@ -88,10 +88,10 @@ function myMap() {
         }
 
         var marker = new google.maps.Marker({
-        position: mapProp.center,
-        map: map,
-        title: spaceName,
-      });
+          position: mapProp.center,
+          map: map,
+          title: spaceName,
+        });
        
       var infowindow = new google.maps.InfoWindow({
         content: spaceName,
@@ -103,6 +103,7 @@ function myMap() {
             
             window.open("https://www.google.com/maps?q=" + mapProp.spaceName);
       });
+    
       } else {
         console.log("No such document!");
       }
@@ -112,7 +113,6 @@ function myMap() {
   } else {
     console.log("Document ID is not provided in the URL parameters.");
   }
-
 }
 
 // Creates popup confirmation message
