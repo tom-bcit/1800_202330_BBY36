@@ -1,5 +1,16 @@
 const optionClick = document.querySelector("#button21")
 
+function myFunction() {
+  const form = document.getElementById("popUpForm");
+  if (form.classList.contains("d-block")) {
+    form.classList.remove("d-block");
+    form.classList.add("d-none");
+  } else {
+    form.classList.remove("d-none");
+    form.classList.add("d-block");
+  }
+}
+
 ///-------------------------------------------------
 ///FOR SEARCH BAR CHECKS WHAT INPUT IT
 ///---------------------------------------------------

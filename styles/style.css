@@ -25,6 +25,7 @@ form #searchButton{
 }
 #form1{
   position: relative;
+  display: inline;
 }
 #form1 a{
   color: #127475;
@@ -55,13 +56,10 @@ form #searchButton{
 }
 
 #button2{
-  width: 40%;
+  width: 12%;
 
 }
-#button12{
-  width: 40%;
 
-}
 .button {
   position: relative;
   background-color: #f5ead8;
