@@ -76,7 +76,7 @@ function displayCardsDynamically(collection) {
                         newcard.querySelector('.status_text').innerHTML = "Busy";
                     }
                     newcard.querySelector('.card-image').src = `./images/${spaceCode}.jpg`; //Example: NV01.jpg
-                    newcard.querySelector('.card').id = docID + "_" + doc.data()?.capacity + "_" + doc.data()?.power_outlet;
+                    newcard.querySelector('.card').id = docID + "_" + doc.data()?.capacity + "_" + doc.data()?.power_outlet + "_" + measure(longitude, latitude);
                     newcard.querySelector('.favorite').id = 'save-' + docID;
                     newcard.querySelector('.favorite').onclick = () => saveFavorite(docID);
                     newcard.querySelector('a').href = "eachSpace.html?docID=" + docID;

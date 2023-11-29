@@ -11,6 +11,7 @@ function myFunction() {
   }
 }
 
+
 ///-------------------------------------------------
 ///FOR SEARCH BAR CHECKS WHAT INPUT IT
 ///---------------------------------------------------
@@ -135,10 +136,10 @@ form.addEventListener("submit", (e) =>{
     console.log(card)
     console.log(card[2].toString() , powerOutlet.value)
     console.log(card[2].toString() === powerOutlet.value)
-    console.log(numPeople.value && +numPeople.value < +card[1] == false)
+    console.log(distance.value);
+    console.log(card[3]);
 
-
-    if ((numPeople.value && +numPeople.value < +card[1]) || (powerOutlet.value && card[2].toString() !== powerOutlet.value)) {
+    if ((numPeople.value && +numPeople.value < +card[1]) || (powerOutlet.value && card[2].toString() !== powerOutlet.value) || (distance.value && +distance.value < card[3])) {
       cards[i].classList.add('hide');
     } else {
       cards[i].classList.remove('hide'); 
