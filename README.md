@@ -20,21 +20,17 @@ List technologies (with version numbers), API's, icons, fonts, images, media or 
 ## 4. Complete setup/installion/usage
 State what a user needs to do when they come to your project.  How do others start using your code or application?
 Here are the steps ...
-* ...
-* ...
-* ...
+* Request API keys
+* Clone repository
+* Thats it!
 
 ## 5. Known Bugs and Limitations
 Here are some known bugs:
-* ...
-* ...
-* ...
+* 
 
 ## 6. Features for Future
 What we'd like to buildx in the future:
-* ...
-* ...
-* ...
+* Personalized default filters
 	
 ## 7. Contents of Folder
 Content of the project folder:
@@ -43,6 +39,7 @@ Content of the project folder:
  Top level of project folder: 
 ├── .gitignore               # Git ignore file
 ├── index.html               # landing HTML file, this is what users see when you come to url
+├── main.html                # main HTML file, this is what users see when after logging in
 └── README.md
 
 It has the following subfolders and files:
