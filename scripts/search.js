@@ -1,5 +1,6 @@
 const optionClick = document.querySelector("#button21")
 
+// Creates a dropdown suggestion in search area
 function myFunction() {
   const form = document.getElementById("popUpForm");
   if (form.classList.contains("d-block")) {
@@ -39,7 +40,7 @@ let capacity = [];
 let spaceOutlet = [];
 let docname = [];
 
-// 
+// Grabs capacity and power outlet data
 function getDocData() {
   collectionRef.get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
@@ -78,6 +79,7 @@ let selectedDistance;
 let selectedOutlet;
 let selectedPeople;
 
+// adds event listeners for all filterable fields
 function addEventListeners() {
   distance.addEventListener("change", () => {
      selectedDistance = distance.value;
@@ -120,11 +122,9 @@ function addEventListeners() {
     numPeople.value = newPeople;
 });
 
-
+  //fiter the cards based in the filter 
 form.addEventListener("submit", (e) =>{
   e.preventDefault();
-
-  //fiter the cards based in the filter
 
   console.log(+numPeople.value , "capacity");
   console.log(powerOutlet.value , "powerOutlet");
@@ -151,7 +151,7 @@ form.addEventListener("submit", (e) =>{
 addEventListeners();  
 
 
-
+// looks for matches to search string and hides those that do not match
 function dosearch() {
   var result = document.getElementById("search-1").value.toLowerCase(); // Get the user's search term
   // Proceed only if the result is not empty

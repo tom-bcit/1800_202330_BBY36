@@ -9,14 +9,13 @@ List team members and/or short bio's here...
 * MY NAME IS DANIAL:)
 * Hi my name is Tom! I am excited to make this app together.
 * Hi my name is Caitlyn! I am excited to make this app together.
-* ...
 	
 ## 3. Technologies and Resources Used
 List technologies (with version numbers), API's, icons, fonts, images, media or data sources, and other resources that were used.
 * HTML, CSS, JavaScript
 * Bootstrap 5.0 (Frontend library)
 * Firebase 8.0 (BAAS - Backend as a Service)
-* ...
+* Font Awesome 4.7
 
 ## 4. Complete setup/installion/usage
 State what a user needs to do when they come to your project.  How do others start using your code or application?
